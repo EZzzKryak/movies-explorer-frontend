@@ -1,0 +1,84 @@
+@import url(../../vendor/normalize.css);
+
+.page {
+  font-family: "Inter", "Arial", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  max-width: 1280px;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #073042;
+  color: #fff;
+  font-weight: 400;
+  /* margin: 0 auto; */
+  font-style: normal;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+  padding: 28px 0px;
+}
+.header__logo {
+  display: block;
+  max-width: 38px;
+}
+.header__profile-btn {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: end;
+  max-width: 100px;
+  padding: 3px 3px 3px 11px;
+  background-color: #2be080;
+  border: none;
+  border-radius: 40px;
+  outline: none;
+}
+.header__profile-icon {
+  padding: 7.5px;
+  display: block;
+  width: 10.5px;
+  height: 10.5px;
+  background-color: #fff;
+  border-radius: 50px;
+}
+.header__profile-text {
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 12px;
+  font-weight: 500;
+  color: #000;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  list-style-type: none;
+}
+.navbar__link {
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.main {
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+  padding: 0;
+}
+.main__project-name {
+    max-width: 640px;
+    font-size: 50px;
+    line-height: 58px;
+}
+
+.footer {
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+}
