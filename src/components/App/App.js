@@ -1,25 +1,53 @@
-import headerLogo from "../../images/circle-logo.svg";
-import profileIcon from "../../images/profile-icon.svg";
+import { Link } from "react-router-dom";
+import Header from "../Header/Header";
 import "./App.css";
 
 const App = () => {
   return (
     <div className="page">
-      <header className="header">
-        <img src={headerLogo} alt="Лого шапки" className="header__logo" />
-        <nav className="navbar">
-          <li className="navbar__link">Фильмы</li>
-          <li className="navbar__link">Сохранённые фильмы</li>
-        </nav>
-        {/* Будет ошибка скорее всего, т.к. картинка внутри кнопки */}
-        <div className="header__profile-btn">
-          <p className="header__profile-text">Аккаунт</p>
-          <img src={profileIcon} alt="Иконка профиля" className="header__profile-icon"/>
-        </div>
-      </header>
+      <div className="dark-bg">
+        <Header />
+      </div>
 
       <main className="main">
-        <h1 className="main__project-name">Учебный проект студента факультета Веб-разработки.</h1>
+        <div className="dark-bg">
+          <section className="promo">
+            <h1 className="promo__title">
+              Учебный проект студента факультета Веб-разработки.
+            </h1>
+            <p className="promo__below-info">
+              Листайте ниже, чтобы узнать больше про этот проект и его
+              создателя.
+            </p>
+            <Link className="promo__learn-more">Узнать больше</Link>
+          </section>
+        </div>
+
+        <section className="project">
+          <h2 className="project__title">О проекте</h2>
+          <ul className="project__runtime">
+            <li className="project__runtime-item">
+              <h3 className="project__runtime-title">Дипломный проект включал 5 этапов</h3>
+              <p className="project__runtime-text">
+                Составление плана, работу над бэкендом, вёрстку, добавление
+                функциональности и финальные доработки.
+              </p>
+            </li>
+            <li className="project__runtime-item">
+              <h3 className="project__runtime-title">На выполнение диплома ушло 5 недель</h3>
+              <p className="project__runtime-text">
+                У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
+                соблюдать, чтобы успешно защититься.
+              </p>
+            </li>
+          </ul>
+          <div className="project__runtime-scheme">
+            <div className="project__runtime-scheme-item">1 неделя</div>
+            <div className="project__runtime-scheme-item">4 недели</div>
+            <div className="project__runtime-scheme-item">Back-end</div>
+            <div className="project__runtime-scheme-item">Front-end</div>
+          </div>
+        </section>
       </main>
 
       <footer></footer>
