@@ -1,0 +1,60 @@
+.project {
+    margin: 0 auto;
+    padding: 110px 0 104px;
+    color: #000;
+    max-width: calc(100% - 140px);
+  }
+  .project__title {
+    margin: 0;
+    padding: 0 0 16px;
+    font-size: 22px;
+    line-height: 27px;
+    font-weight: 400;
+    letter-spacing: -0.4px; /* Чекнуть */
+    color: #000;
+    border-bottom: 1px solid;
+  }
+  .project__runtime {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+  .project__runtime-item {
+    max-width: 550px;
+  }
+  .project__runtime-title {
+    margin: 70px 0 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .project__runtime-text {
+    padding: 0;
+    margin: 26px 0 0;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .project__runtime-scheme {
+    margin-top: 110px;
+    display: grid;
+    grid-template-columns: 228px auto;
+    text-align: center;
+  }
+  .project__runtime-scheme-item {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 6px 0;
+  }
+  .project__runtime-scheme-item:first-child {
+    background-color: #2be080;
+  }
+  .project__runtime-scheme-item:nth-child(2) {
+    background-color: #f2f2f2;
+  }
+  .project__runtime-scheme-item:nth-child(3),
+  .project__runtime-scheme-item:nth-child(4) {
+    color: #a0a0a0;
+  }

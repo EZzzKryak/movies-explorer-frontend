@@ -1,0 +1,33 @@
+.promo {
+  position: relative;
+  margin: 0 auto;
+  max-width: calc(100% - 140px);
+  padding: 75px 0;
+  background-image: url(../../images/promo-img.svg);
+  background-size: 310px 304px;
+  background-repeat: no-repeat;
+  background-position: 830px 75px;
+  background-color: #073042;
+}
+.promo__title {
+  margin: 0;
+  padding: 0;
+  max-width: 640px;
+  font-size: 50px;
+  line-height: 58px;
+}
+.promo__below-info {
+  margin: 36px 0 146px;
+  max-width: 310px;
+  font-size: 13px;
+  line-height: 16px;
+}
+.promo__learn-more {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+}
