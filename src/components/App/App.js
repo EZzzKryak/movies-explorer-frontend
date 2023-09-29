@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 // import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import Films from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import "./App.css";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
 
       <main className="main">
         <Films />
+        <SavedMovies />
         {/* <Promo />
         <Project />
         <Techs />

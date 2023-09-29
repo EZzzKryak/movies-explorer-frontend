@@ -28,19 +28,6 @@
   outline: none;
   border-radius: 25px;
 }
-.movies__checkbox-label {
-  margin: 0;
-  padding: 0;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000;
-}
-.movies__checkbox {
-  margin: 33px 0 48px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
 
 .movies__films {
   display: grid;
@@ -51,6 +38,9 @@
 .movies__film {
   min-width: 270px;
   color: #000;
+}
+.movies__film:hover .movies__film-rate {
+  opacity: 1;
 }
 .movies__film-img {
   /* height: 151px; */
@@ -75,10 +65,12 @@
   font-size: 13px;
   line-height: 16px;
 }
-.movies__film-like {
+.movies__film-rate {
   cursor: pointer;
   width: 24px;
   height: 24px;
+  opacity: 0;
+  transition: opacity .2s;
 }
 .movies__film-duration {
   margin: 6px 0 0;
@@ -87,15 +79,41 @@
   line-height: 13px;
   color: #A0A0A0;
 }
+.movies__more {
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  width: 320px;
+  height: 36px;
+  background-color: #F9F9F9;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
 
 .checkbox {
-  display: inline-block;
+  margin: 33px 0 48px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
   height: 14px;
   line-height: 14px;
   position: relative;
   vertical-align: middle;
   font-size: 14px;
   user-select: none;
+}
+.checkbox-label {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
 }
 .checkbox .checkbox-switch {
   position: relative;

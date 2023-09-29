@@ -1,24 +1,11 @@
 import React from "react";
-import dislikeIcon from "../../images/movie-dislike.svg";
-import likeIcon from "../../images/movie-like.svg";
+import deleteIcon from "../../images/delete-film.svg";
 import data from "../../utils/movies";
-import "./Movies.css";
+import "../Movies/Movies.css";
 
-const likeIsActive = true;
-
-const movies = () => {
+const SavedMovies = () => {
   return (
     <section className="movies">
-      <div className="movies__search-panel">
-        <h2 className="movies__title">Фильм</h2>
-        <button className="movies__search-btn">Найти</button>
-      </div>
-      <label class="checkbox">
-        <input type="checkbox" />
-        <span class="checkbox-switch"></span>
-        <p className="checkbox-label">Короткометражки</p>
-      </label>
-
       <div className="movies__films">
         {data.map(film => (
           <div className="movies__film" key={film.movieId}>
@@ -31,7 +18,7 @@ const movies = () => {
               <h3 className="movies__film-name">{film.nameRU}</h3>
               <img
                 className="movies__film-rate"
-                src={likeIsActive ? likeIcon : dislikeIcon}
+                src={deleteIcon}
                 alt="Лайк/дизлайк"
               />
               {/* Может сделать кнопкой? */}
@@ -41,9 +28,8 @@ const movies = () => {
           </div>
         ))}
       </div>
-      <button className="movies__more">Ещё</button>
     </section>
   );
 };
 
-export default movies;
+export default SavedMovies;
