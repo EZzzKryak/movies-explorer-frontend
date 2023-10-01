@@ -1,8 +1,7 @@
 .promo {
   position: relative;
-  margin: 0 auto;
-  max-width: calc(100% - 140px);
-  padding: 75px 0;
+  /* max-width: calc(100% - 140px); */
+  padding: 75px 70px;
   background-image: url(../../images/promo-img.svg);
   background-size: 310px 304px;
   background-repeat: no-repeat;
@@ -15,12 +14,14 @@
   max-width: 640px;
   font-size: 50px;
   line-height: 58px;
+  color: #fff;
 }
 .promo__below-info {
   margin: 36px 0 146px;
   max-width: 310px;
   font-size: 13px;
   line-height: 16px;
+  color: #fff;
 }
 .promo__learn-more {
   padding: 10px 20px;

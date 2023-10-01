@@ -1,7 +1,7 @@
 import React from 'react';
-import "./AboutMe.css";
-import myPhoto from "../../images/my-photo.jpg";
 import { Link } from "react-router-dom";
+import myPhoto from "../../images/my-photo.jpg";
+import "./AboutMe.css";
 
 const AboutMe = () => {
     return (
@@ -25,7 +25,7 @@ const AboutMe = () => {
                 science. Хочу начать карьеру в it и работать над действительно
                 крутыми продуктами.
               </p>
-              <Link className="about-me__github">Github</Link>
+              <Link target="_blank" to="https://github.com/EZzzKryak" className="about-me__github link">Github</Link>
             </div>
             <img className="about-me__photo" src={myPhoto} alt="Моё фото" />
           </div>

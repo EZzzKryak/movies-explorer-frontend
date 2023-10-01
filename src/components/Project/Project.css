@@ -1,8 +1,7 @@
 .project {
-    margin: 0 auto;
-    padding: 110px 0 104px;
+    padding: 110px 70px 104px;
     color: #000;
-    max-width: calc(100% - 140px);
+    /* max-width: calc(100% - 140px); */
   }
   .project__title {
     margin: 0;

@@ -1,6 +1,6 @@
 .footer {
-  padding-top: 80px;
-  max-width: calc(100% - 140px);
+  padding: 80px 70px 0;
+  /* max-width: calc(100% - 140px); */
   margin: 0 auto;
 }
 .footer__text {

@@ -1,25 +1,56 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import headerLogo from "../../images/circle-logo.svg";
 import profileIcon from "../../images/profile-icon.svg";
-import './Header.css';
+import "./Header.css";
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
   return (
     <header className="header">
       <img src={headerLogo} alt="Лого шапки" className="header__logo" />
-      <nav className="navbar">
-        <Link className="navbar__link">Фильмы</Link>
-        <Link className="navbar__link">Сохранённые фильмы</Link>
-      </nav>
-      <Link className="header__profile-btn">
-        <p className="header__profile-text">Аккаунт</p>
-        <img
-          src={profileIcon}
-          alt="Иконка профиля"
-          className="header__profile-icon"
-        />
-      </Link>
+      {loggedIn ? (
+        <>
+          <nav className="navbar">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "navbar__link navbar__link_active link"
+                  : "navbar__link link"
+              }
+              to="movies"
+            >
+              Фильмы
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "navbar__link navbar__link_active link"
+                  : "navbar__link link"
+              }
+              to="saved-movies"
+            >
+              Сохранённые фильмы
+            </NavLink>
+          </nav>
+          <Link to="profile" className="header__profile link">
+            <p className="header__profile-text">Аккаунт</p>
+            <img
+              src={profileIcon}
+              alt="Иконка профиля"
+              className="header__profile-icon"
+            />
+          </Link>
+        </>
+      ) : (
+        <div className="header__auth-links">
+          <Link to="signup" className="header__signup link">
+            Регистрация
+          </Link>
+          <Link to="signin" className="header__signin link">
+            Войти
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
