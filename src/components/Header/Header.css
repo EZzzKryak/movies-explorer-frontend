@@ -7,7 +7,7 @@
   padding: 18px 70px;
   background-color: #073042;
 }
-.header__logo {
+.logo {
   display: block;
   max-width: 38px;
 }
@@ -22,7 +22,6 @@
   border: none;
   border-radius: 40px;
   outline: none;
-  text-decoration: none;
   /* box-shadow: #000000 0 0 8px; */
 }
 .header__profile-icon {
@@ -47,7 +46,6 @@
   gap: 30px;
 }
 .header__signup {
-  text-decoration: none;
   color: #fff;
   font-size: 12px;
   line-height: 16px;
@@ -57,7 +55,6 @@
   padding: 8px 20px;
   background-color: #2be080;
   border-radius: 3px;
-  text-decoration: none;
   color: #000;
   font-size: 12px;
   line-height: 16px;
@@ -75,7 +72,6 @@
   margin: 0;
   font-size: 13px;
   line-height: 18px;
-  text-decoration: none;
   color: #fff;
 }
 .navbar__link_active {

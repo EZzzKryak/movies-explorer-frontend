@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import headerLogo from "../../images/circle-logo.svg";
+import LogoIcon from "../../images/circle-logo.svg";
 import profileIcon from "../../images/profile-icon.svg";
 import "./Header.css";
 
 const Header = ({ loggedIn }) => {
   return (
     <header className="header">
-      <img src={headerLogo} alt="Лого шапки" className="header__logo" />
+      <img src={LogoIcon} alt="Лого сайта" className="logo" />
       {loggedIn ? (
         <>
           <nav className="navbar">

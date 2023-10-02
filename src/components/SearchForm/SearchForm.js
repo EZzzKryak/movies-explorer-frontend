@@ -1,11 +1,30 @@
 import React from "react";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import "./SearchForm.css";
 
 const SearchForm = () => {
+  const { values, handleChange, resetForm } = useFormAndValidation();
+  const { movie } = values;
+
   return (
     <div className="search-panel">
-      <h2 className="search-panel__title">Фильм</h2>
-      <button className="search-panel__search-btn button">Найти</button>
+      <form className="search-panel__form">
+        <input
+          className="search-panel__input"
+          type="text"
+          name="movie"
+          placeholder="Фильм"
+          value={movie || ""}
+          onChange={handleChange}
+        />
+        <button
+          className="search-panel__search-btn button"
+          type="submit"
+          aria-label="Поиск фильма"
+        >
+          Найти
+        </button>
+      </form>
     </div>
   );
 };

@@ -4,11 +4,11 @@
   max-width: max-content;
   display: flex;
   gap: 15px;
-  justify-content: start;
+  align-items: center;
   line-height: 14px;
   position: relative;
   font-size: 14px;
-  user-select: none;
+  /* user-select: none; */
 }
 .checkbox__label {
   cursor: pointer;
