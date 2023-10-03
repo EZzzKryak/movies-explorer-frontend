@@ -5,6 +5,9 @@
   /* max-width: calc(100% - 140px); */
   margin: 0 auto;
   padding: 18px 70px;
+  background-color: #fff;
+}
+.header_dark {
   background-color: #073042;
 }
 .logo {
@@ -18,18 +21,21 @@
   justify-content: end;
   max-width: 100px;
   padding: 3px 3px 3px 11px;
-  background-color: #2be080;
+  background-color: #fff;
   border: none;
   border-radius: 40px;
   outline: none;
-  /* box-shadow: #000000 0 0 8px; */
+  box-shadow: rgba(0, 0, 0, 0.08) 0 3px 14px;
+}
+.header__profile_dark {
+  background-color: #2be080;
 }
 .header__profile-icon {
   display: block;
   padding: 7.5px;
   width: 10.5px;
   height: 10.5px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-radius: 50px;
 }
 .header__profile-text {
@@ -63,8 +69,8 @@
 
 .navbar {
   display: flex;
-  justify-content: center;
   gap: 16px;
+  justify-content: center;
   list-style-type: none;
 }
 .navbar__link {
@@ -72,6 +78,9 @@
   margin: 0;
   font-size: 13px;
   line-height: 18px;
+  color: #000;
+}
+.navbar__link_dark {
   color: #fff;
 }
 .navbar__link_active {

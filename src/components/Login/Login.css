@@ -12,6 +12,7 @@
   color: #000;
 }
 .auth__form {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -43,15 +44,15 @@
   border-bottom: 1px solid #3456f3;
 }
 .auth__input-error {
-  top: calc(100% + 6px);
   position: absolute;
+  top: calc(100% + 6px);
   left: 0;
-  opacity: 0;
   transition: opacity 0.3s;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ff0000;
+  opacity: 0;
 }
 .auth__input-error_active {
   opacity: 1;
@@ -76,22 +77,18 @@
   line-height: 17px;
   font-weight: 400;
 }
-.auth__submit-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
 /* Колхозное позиционирование ошибки */
 .auth__submit-error {
-  position: absolute;
+  text-align: center;
   padding: 0;
-  margin: 100px 0 0;
+  margin: 190px 0 0;
+  font-size: 11px;
+  line-height: 13px;
   color: #ff0000;
   opacity: 1;
 }
 .auth__submit {
-  margin: 222px 0 16px;
+  margin: 20px 0 16px;
   padding: 15px 0;
   color: #fff;
   font-weight: 500;

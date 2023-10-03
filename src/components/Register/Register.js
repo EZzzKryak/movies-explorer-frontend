@@ -91,6 +91,9 @@ const Register = ({ handleRegister }) => {
             {errors.password}
           </span>
         </label>
+        <p className="auth__submit-error">
+          Пользователь с таким email уже существует.
+        </p>
         <button
           disabled={!isValid}
           type="submit"

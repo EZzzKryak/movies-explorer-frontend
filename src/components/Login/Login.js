@@ -72,17 +72,17 @@ const Login = ({ handleLogin }) => {
             {errors.password}
           </span>
         </label>
-        <div className="auth__submit-container">
-          <p className="auth__submit-error">При обновлении профиля произошла ошибка.</p>
-          <button
-            disabled={!isValid}
-            type="submit"
-            className="auth__submit button"
-            aria-label="Сохранить данные"
-          >
-            Войти
-          </button>
-        </div>
+        <p className="auth__submit-error">
+          Вы ввели неправильный логин или пароль.
+        </p>
+        <button
+          disabled={!isValid}
+          type="submit"
+          className="auth__submit button"
+          aria-label="Сохранить данные"
+        >
+          Войти
+        </button>
         <div className="auth__link-container">
           <p className="auth__link-question">Ещё не зарегистрированы?</p>
           <Link className="auth__link link" to="/signup">
