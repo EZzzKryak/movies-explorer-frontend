@@ -6,7 +6,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css";
 
-const movies = () => {
+const Movies = () => {
   return (
     <>
       <Header />
@@ -21,4 +21,4 @@ const movies = () => {
   );
 };
 
-export default movies;
+export default Movies;

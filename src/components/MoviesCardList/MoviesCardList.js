@@ -5,11 +5,11 @@ import "./MoviesCardList.css";
 
 const MoviesCardList = () => {
   return (
-    <div className="movies-list">
+    data.length > 0 ? (<div className="movies-list">
       {data.map(film => (
         <MoviesCard film={film} key={film.movieId}/>
       ))}
-    </div>
+    </div>) : <p className="empty-list">Фильмы не найдены</p>
   );
 };
 

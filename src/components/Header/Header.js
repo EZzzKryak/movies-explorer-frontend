@@ -1,56 +1,29 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import LogoIcon from "../../images/circle-logo.svg";
 import profileIcon from "../../images/profile-icon.svg";
+import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
 const Header = () => {
-  const darkHeaderStyle = !(
+  // Костыль, подумать над заменой
+  const moviesOrProfileRoute = !(
     window.location.href.includes("profile") ||
     window.location.href.includes("movies")
   );
   const { loggedIn } = useContext(AuthContext);
 
   return (
-    <header className={`header${darkHeaderStyle ? " header_dark" : ""}`}>
-      <img src={LogoIcon} alt="Лого сайта" className="logo" />
+    <header className={`header${moviesOrProfileRoute ? " header_dark" : ""}`}>
+      <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
       {loggedIn ? (
         <>
-          <nav className="navbar">
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? `${
-                      darkHeaderStyle ? "navbar__link_dark " : ""
-                    }navbar__link navbar__link_active link`
-                  : `${
-                      darkHeaderStyle ? "navbar__link_dark " : ""
-                    }navbar__link link`
-              }
-              to="/movies"
-            >
-              Фильмы
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? `${
-                      darkHeaderStyle ? "navbar__link_dark " : ""
-                    }navbar__link navbar__link_active link`
-                  : `${
-                      darkHeaderStyle ? "navbar__link_dark " : ""
-                    }navbar__link link`
-              }
-              to="/saved-movies"
-            >
-              Сохранённые фильмы
-            </NavLink>
-          </nav>
+          <Navigation />
           <Link
             to="/profile"
             className={`header__profile link${
-              darkHeaderStyle ? " header__profile_dark" : ""
+              moviesOrProfileRoute ? " header__profile_dark" : ""
             }`}
           >
             <p className="header__profile-text">Аккаунт</p>

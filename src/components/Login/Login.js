@@ -7,7 +7,6 @@ import "./Login.css";
 const Login = ({ handleLogin }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
-
   const { email, password } = values;
 
   const handleSubmit = e => {
@@ -22,7 +21,7 @@ const Login = ({ handleLogin }) => {
 
   return (
     <section className="auth">
-      <img src={LogoIcon} alt="Лого сайта" className="logo" />
+      <img src={LogoIcon} alt="Логотип сайта" className="auth__logo" />
       <h2 className="auth__title">Рады видеть!</h2>
       <form
         name="login"

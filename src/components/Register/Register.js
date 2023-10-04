@@ -12,6 +12,9 @@ const Register = ({ handleRegister }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!email || !password || !name) {
+      return;
+    }
     if (isValid) {
       handleRegister(values, resetForm);
     }
@@ -32,8 +35,8 @@ const Register = ({ handleRegister }) => {
           <input
             // pattern=""
             id="reg-name-input"
-            minLength="4"
-            maxLength="32"
+            minLength="2"
+            maxLength="30"
             type="text"
             name="name"
             className="auth__input"

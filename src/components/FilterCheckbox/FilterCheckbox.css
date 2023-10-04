@@ -8,7 +8,6 @@
   line-height: 14px;
   position: relative;
   font-size: 14px;
-  /* user-select: none; */
 }
 .checkbox__label {
   cursor: pointer;
@@ -25,7 +24,6 @@
   box-sizing: border-box;
   width: 34px;
   height: 14px;
-  /* border: 1px solid rgba(0, 0, 0, .1); */
   border-radius: 20px;
   vertical-align: top;
   background: #ebebeb;
@@ -41,7 +39,6 @@
   height: 10px;
   border-radius: 50%;
   background: #f5f5f5;
-  /* box-shadow: 0 3px 5px rgba(0, 0, 0, .3); */
   transition: 0.15s;
 }
 .checkbox input[type="checkbox"] {

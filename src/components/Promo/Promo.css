@@ -15,9 +15,11 @@
   font-size: 50px;
   line-height: 58px;
   color: #fff;
+  font-weight: 500;
 }
 .promo__below-info {
   margin: 36px 0 146px;
+  padding: 0;
   max-width: 310px;
   font-size: 13px;
   line-height: 16px;
@@ -25,10 +27,10 @@
 }
 .promo__learn-more {
   padding: 10px 20px;
-  text-decoration: none;
   font-size: 12px;
   line-height: 16px;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 3px;
+  font-weight: 500;
 }

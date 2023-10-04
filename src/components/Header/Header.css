@@ -1,20 +1,27 @@
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  /* max-width: calc(100% - 140px); */
-  margin: 0 auto;
   padding: 18px 70px;
   background-color: #fff;
 }
 .header_dark {
   background-color: #073042;
 }
-.logo {
+.header__logo {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
   display: block;
   max-width: 38px;
 }
 .header__profile {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   gap: 7px;
   align-items: center;
@@ -65,24 +72,4 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-}
-
-.navbar {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  list-style-type: none;
-}
-.navbar__link {
-  padding: 0;
-  margin: 0;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000;
-}
-.navbar__link_dark {
-  color: #fff;
-}
-.navbar__link_active {
-  font-weight: 600;
 }

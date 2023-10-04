@@ -11,7 +11,7 @@ const Promo = () => {
       <p className="promo__below-info">
         Листайте ниже, чтобы узнать больше про этот проект и его создателя.
       </p>
-      <Link className="promo__learn-more button">Узнать больше</Link>
+      <Link to="https://github.com/EZzzKryak/movies-explorer-frontend" target="_blank" className="promo__learn-more button">Узнать больше</Link>
     </section>
   );
 };

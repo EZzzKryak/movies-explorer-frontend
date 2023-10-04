@@ -5,25 +5,35 @@ import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-const Profile = () => {
+const Profile = ({ handleEditProfile, onSignOut }) => {
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
-
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
   const { name, email } = values;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (isValid) {
+      handleEditProfile(values);
+    }
+  };
 
   return (
     <>
       <Header />
       <section className="profile">
         <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-        <form className="profile__form" name="register" noValidate>
+        <form
+          className="profile__form"
+          name="register"
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <div className="profile__field">
             <label className="profile__label">Имя</label>
             <input
               id="profile-name-input"
-              minLength="4"
-              maxLength="32"
+              minLength="2"
+              maxLength="30"
               type="text"
               name="name"
               className="profile__input"
@@ -59,15 +69,17 @@ const Profile = () => {
               {errors.email}
             </span>
           </div>
+          <button
+            type="submit"
+            aria-label="Редактировать профиль"
+            className="profile__edit button"
+          >
+            Редактировать
+          </button>
         </form>
-        <ul className="profile__links">
-          <li className="profile__link">
-            <Link className="profile__edit link">Редактировать</Link>
-          </li>
-          <li className="profile__link">
-            <Link className="profile__signout link">Выйти из аккаунта</Link>
-          </li>
-        </ul>
+        <Link to="/" onClick={onSignOut} className="profile__signout link">
+          Выйти из аккаунта
+        </Link>
       </section>
     </>
   );

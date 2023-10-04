@@ -1,30 +1,38 @@
 import React from "react";
-import deleteIcon from "../../images/delete-film.svg";
-import likeIcon from "../../images/movie-like.svg";
+import { Link } from "react-router-dom";
 import "./MoviesCard.css";
 
-const likeIsActive = true;
-const convertDuration = duration => (Math.floor(duration / 60) && Math.floor(duration / 60) + "ч") + (duration % 60) + "м";
-
 const MoviesCard = ({ film }) => {
+  const convertDuration = duration =>
+    (Math.floor(duration / 60) && Math.floor(duration / 60) + "ч") +
+    (duration % 60) +
+    "м";
+
+  // Временное решение до функционала
+  const savedFilmsRoute = window.location.href.includes("saved-movies");
+  const toggleLike = e => {
+    e.target.classList.toggle("movie__like_active");
+  };
+
   return (
     <div className="movie" key={film.movieId}>
-      <img
-        className="movie__thumbnail"
-        src={film.thumbnail}
-        alt={`Постер фильма ${film.nameRU}`}
-      />
+      <Link to={film.trailerLink} target="_blank">
+        <img
+          className="movie__thumbnail"
+          src={film.thumbnail}
+          alt={`Постер фильма ${film.nameRU}`}
+        />
+      </Link>
       <div className="movie__container">
         <h3 className="movie__name">{film.nameRU}</h3>
-        <img
-          className="movie__rate"
-          src={likeIsActive ? likeIcon : deleteIcon}
-          alt="Лайк/дизлайк"
+        <button
+          onClick={toggleLike}
+          className={savedFilmsRoute ? "movie__delete" : "movie__like"}
+          type="button"
+          aria-label="Лайк\дизлайк"
         />
-        {/* Может сделать кнопкой? */}
       </div>
       <p className="movie__duration">{convertDuration(film.duration)}</p>
-      {/* Формат времени */}
     </div>
   );
 };

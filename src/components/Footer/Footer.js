@@ -9,7 +9,7 @@ const Footer = () => {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__container">
-        <p className="footer__copyright">&#169; 2023</p>
+        <p className="footer__copyright">&#169; {new Date().getFullYear()}</p>
         <div className="footer__links">
           <Link
             target="_blank"

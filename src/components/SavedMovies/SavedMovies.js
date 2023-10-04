@@ -14,7 +14,6 @@ const SavedMovies = () => {
         <SearchForm />
         <FilterCheckbox />
         <MoviesCardList />
-        <button className="movies__more button">Ещё</button>
       </main>
       <Footer />
     </>
