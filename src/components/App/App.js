@@ -5,6 +5,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import NotFound from "../NotFound/NotFound";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="movies" element={<Movies />}></Route>
             <Route path="saved-movies" element={<SavedMovies />}></Route>
             <Route path="profile" element={<Profile />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </div>
         {/* // </div> */}
