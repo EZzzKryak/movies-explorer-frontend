@@ -14,6 +14,7 @@ const SavedMovies = () => {
         <SearchForm />
         <FilterCheckbox />
         <MoviesCardList />
+        <div className="movies__more-placeholder"></div>
       </main>
       <Footer />
     </>

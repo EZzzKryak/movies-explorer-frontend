@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import LogoIcon from "../../images/circle-logo.svg";
 import profileIcon from "../../images/profile-icon.svg";
+// import MenuBurger from "../MenuBurger/MenuBurger";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
@@ -16,10 +17,13 @@ const Header = () => {
 
   return (
     <header className={`header${moviesOrProfileRoute ? " header_dark" : ""}`}>
-      <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
+      <Link to={"/"}>
+        <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
+      </Link>
       {loggedIn ? (
         <>
           <Navigation />
+          {/* <MenuBurger /> */}
           <Link
             to="/profile"
             className={`header__profile link${

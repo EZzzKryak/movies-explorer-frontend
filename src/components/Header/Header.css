@@ -73,3 +73,12 @@
   line-height: 16px;
   font-weight: 500;
 }
+
+@media screen and (max-width: 1279px) {
+  .header {
+    padding: 21px 30px;
+  }
+  .header__logo {
+    left: 30px
+  }
+}

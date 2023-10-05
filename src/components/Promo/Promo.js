@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./Promo.css";
 
 const Promo = () => {
+  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+  useEffect(() => {
+    console.log("awdwa");
+  }, [isDesktop, isTablet, isMobile]);
+
   return (
     <section className="promo">
-      <h1 className="promo__title">
-        Учебный проект студента факультета Веб-разработки.
-      </h1>
-      <p className="promo__below-info">
-        Листайте ниже, чтобы узнать больше про этот проект и его создателя.
-      </p>
-      <Link to="https://github.com/EZzzKryak/movies-explorer-frontend" target="_blank" className="promo__learn-more button">Узнать больше</Link>
+      <div className="promo__container">
+        {(isTablet && !isDesktop) && <div className="promo__img"></div>}
+        <div className="promo__info">
+          <h1 className="promo__title">
+            Учебный проект студента факультета Веб-разработки.
+          </h1>
+          <p className="promo__below-info">
+            Листайте ниже, чтобы узнать больше про этот проект и его создателя.
+          </p>
+        </div>
+        {isDesktop && <div className="promo__img"></div>}
+      </div>
+      <Link
+        to="https://github.com/EZzzKryak/movies-explorer-frontend"
+        target="_blank"
+        className="promo__learn-more button"
+      >
+        Узнать больше
+      </Link>
     </section>
   );
 };

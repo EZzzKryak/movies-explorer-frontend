@@ -1,11 +1,12 @@
 .project {
-    padding: 110px 70px 104px;
+    padding: 110px 70px;
     color: #000;
     /* max-width: calc(100% - 140px); */
   }
   .project__title {
     margin: 0;
-    padding: 0 0 16px;
+    padding: 0 0 23px;
+    text-align: left;
     font-size: 22px;
     line-height: 27px;
     font-weight: 400;
@@ -15,7 +16,7 @@
   }
   .project__runtime {
     padding: 0;
-    margin: 0;
+    margin: 70px 0 0;
     display: flex;
     justify-content: space-between;
     list-style-type: none;
@@ -24,7 +25,7 @@
     max-width: 550px;
   }
   .project__runtime-title {
-    margin: 70px 0 0;
+    margin: 0;
     padding: 0;
     font-size: 20px;
     line-height: 24px;
@@ -57,3 +58,25 @@
   .project__runtime-scheme-item:nth-child(4) {
     color: #a0a0a0;
   }
+
+@media screen and (max-width: 1279px) {
+  .project {
+    padding: 90px 50px;
+  }
+  .project__runtime-item {
+    max-width: 320px;
+  }
+  .project__runtime-text {
+    margin: 22px 0 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .project__runtime-scheme {
+    margin-top: 93px;
+    grid-template-columns: 140px auto;
+  }
+  .project__runtime-scheme-item:nth-child(3),
+  .project__runtime-scheme-item:nth-child(4) {
+    padding: 14px 0;
+  }
+}
