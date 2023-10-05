@@ -22,7 +22,7 @@ const Register = ({ handleRegister }) => {
 
   return (
     <section className="auth">
-      <img src={LogoIcon} alt="Лого сайта" className="logo" />
+      <img src={LogoIcon} alt="Лого сайта" className="auth__logo" />
       <h2 className="auth__title">Добро пожаловать!</h2>
       <form
         name="register"
@@ -94,7 +94,7 @@ const Register = ({ handleRegister }) => {
             {errors.password}
           </span>
         </label>
-        <p className="auth__submit-error">
+        <p className="auth__submit-error auth__submit-error_register">
           Пользователь с таким email уже существует.
         </p>
         <button

@@ -81,4 +81,7 @@
   .header__logo {
     left: 30px
   }
+  .header__profile {
+    right: 30px;
+  }
 }

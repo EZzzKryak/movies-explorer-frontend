@@ -1,6 +1,5 @@
 .auth {
-  margin: 0 auto;
-  padding-top: 70px;
+  margin: 70px auto 0;
   width: 396px;
 }
 .auth__title {
@@ -90,6 +89,9 @@
   color: #ff0000;
   opacity: 0;
 }
+.auth__submit-error_register {
+  margin-top: 121px;
+}
 .auth__submit-error_active {
   opacity: 1;
 }
@@ -112,4 +114,10 @@
   color: #c2c2c2;
   background-color: #f8f8f8;
   pointer-events: none;
+}
+
+@media screen and (max-width: 1279px) {
+  .auth {
+    margin-top: 232px;
+  }
 }

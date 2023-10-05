@@ -76,3 +76,15 @@
   color: #ff3055;
   font-weight: 500;
 }
+
+@media screen and (max-width: 1279px) {
+  .profile__title {
+    margin-top: 236px;
+  }
+  .profile__form {
+    margin-top: 96px;
+  }
+  .profile__edit {
+    margin-top: 210px;
+  }
+}
