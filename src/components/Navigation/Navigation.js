@@ -15,11 +15,11 @@ const Navigation = () => {
           className={({ isActive }) =>
             isActive
               ? `${
-                  moviesOrProfileRoute ? "navbar__link_dark " : ""
-                }navbar__link navbar__link_active link`
+                  moviesOrProfileRoute && "navbar__link_dark"
+                } navbar__link navbar__link_active link`
               : `${
-                  moviesOrProfileRoute ? "navbar__link_dark " : ""
-                }navbar__link link`
+                  moviesOrProfileRoute && "navbar__link_dark"
+                } navbar__link link`
           }
           to="/movies"
         >
@@ -31,11 +31,11 @@ const Navigation = () => {
           className={({ isActive }) =>
             isActive
               ? `${
-                  moviesOrProfileRoute ? "navbar__link_dark " : ""
-                }navbar__link navbar__link_active link`
+                  moviesOrProfileRoute && "navbar__link_dark"
+                } navbar__link navbar__link_active link`
               : `${
-                  moviesOrProfileRoute ? "navbar__link_dark " : ""
-                }navbar__link link`
+                  moviesOrProfileRoute && "navbar__link_dark"
+                } navbar__link link`
           }
           to="/saved-movies"
         >

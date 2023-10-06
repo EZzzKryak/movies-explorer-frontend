@@ -14,7 +14,7 @@ import "./App.css";
 
 const App = () => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const [currentUser, setCurrentUser] = useState({
     name: "Александр",

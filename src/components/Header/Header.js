@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import LogoIcon from "../../images/circle-logo.svg";
-import profileIcon from "../../images/profile-icon.svg";
-// import MenuBurger from "../MenuBurger/MenuBurger";
+import MenuBurger from "../MenuBurger/MenuBurger";
 import Navigation from "../Navigation/Navigation";
+import ProfileButton from "../ProfileButton/ProfileButton";
+import Sidebar from "../Sidebar/Sidebar";
 import "./Header.css";
 
 const Header = () => {
@@ -13,30 +15,42 @@ const Header = () => {
     window.location.href.includes("profile") ||
     window.location.href.includes("movies")
   );
+
   const { loggedIn } = useContext(AuthContext);
+  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+  const [sidebarIsActive, setSideBarIsActive] = useState(false);
+
+  useEffect(() => {
+    setSideBarIsActive(false);
+  }, [isDesktop]);
+
+  const handleSetSideBarIsActive = () => {
+    setSideBarIsActive(!sidebarIsActive);
+  };
 
   return (
-    <header className={`header${moviesOrProfileRoute ? " header_dark" : ""}`}>
+    <header className={`header ${moviesOrProfileRoute && "header_dark"}`}>
       <Link to={"/"}>
         <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
       </Link>
       {loggedIn ? (
         <>
-          <Navigation />
-          {/* <MenuBurger /> */}
-          <Link
-            to="/profile"
-            className={`header__profile link${
-              moviesOrProfileRoute ? " header__profile_dark" : ""
-            }`}
-          >
-            <p className="header__profile-text">Аккаунт</p>
-            <img
-              src={profileIcon}
-              alt="Иконка профиля"
-              className="header__profile-icon"
-            />
-          </Link>
+          {isDesktop ? (
+            <>
+              <Navigation />
+              <div className="header__profile-btn">
+                <ProfileButton />
+              </div>
+            </>
+          ) : (
+            <>
+              <Sidebar
+                sidebarIsActive={sidebarIsActive}
+                onSetSideBarIsActive={handleSetSideBarIsActive}
+              />
+              <MenuBurger onSetSideBarIsActive={handleSetSideBarIsActive} />
+            </>
+          )}
         </>
       ) : (
         <div className="header__auth-links">
