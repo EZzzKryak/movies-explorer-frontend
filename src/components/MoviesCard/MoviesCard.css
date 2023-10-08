@@ -5,7 +5,7 @@
 .movie__thumbnail {
   display: block;
   width: 100%;
-  aspect-ratio: 1.8 / 1;
+  aspect-ratio: 1.79 / 1;
   object-fit: cover;
   object-position: center;
 }
@@ -14,7 +14,7 @@
   gap: 15px;
   align-items: center;
   justify-content: space-between;
-  margin-top: 14px;
+  margin-top: 11px;
   padding-bottom: 25px;
   border-bottom: 1px solid #e8e8e8;
 }
@@ -53,19 +53,43 @@
   opacity: 0;
   transition: opacity 0.2s;
 }
+.movie__delete_active {
+  opacity: 1;
+}
 .movie:hover .movie__delete {
   opacity: 1;
 }
 .movie__duration {
-  margin: 6px 0 0;
+  margin: 7px 0 0;
   padding: 0;
   font-size: 11px;
   line-height: 13px;
   color: #a0a0a0;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 920px) {
   .movie {
     min-width: 339px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movie {
+    min-width: 232px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .movie {
+    min-width: 300px;
+  }
+  .movie__name {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
+  .movie__duration {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 12px;
   }
 }

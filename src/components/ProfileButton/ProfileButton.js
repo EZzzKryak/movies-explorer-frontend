@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import profileIcon from "../../images/profile-icon.svg";
 import "./ProfileButton.css";
 
-const ProfileButton = () => {
+const ProfileButton = ({ lightClass }) => {
   // Костыль, подумать над заменой
   const moviesOrProfileRoute = !(
     window.location.href.includes("profile") ||
     window.location.href.includes("movies")
   );
+
   return (
     <Link
       to="/profile"
-      className={`profile-btn link${
-        moviesOrProfileRoute ? " profile-btn_dark" : ""
+      className={`profile-btn link ${lightClass} ${
+        moviesOrProfileRoute ? "profile-btn_dark" : ""
       }`}
     >
       <p className="profile-btn__text">Аккаунт</p>

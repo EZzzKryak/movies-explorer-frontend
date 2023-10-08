@@ -1,7 +1,9 @@
 .burger {
-  height: 50px;
+  height: 77px;
   width: 100%;
   position: fixed;
+  right: 0;
+  top: 0;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -11,7 +13,7 @@
 .burger__button {
   width: 28px;
   height: 24px;
-  margin-right: 30px;
+  margin-right: 38px;
   position: relative;
   border: none;
   outline: none;
@@ -52,4 +54,23 @@
 }
 .burger__line_light {
   background-color: #fff;
+}
+
+@media screen and (max-width: 540px) {
+  .burger__button {
+    width: 24px;
+    margin-right: 24px;
+  }
+  .burger__button:before {
+    width: 22px;
+    height: 2.5px;
+  }
+  .burger__line {
+    width: 22px;
+    height: 2.5px;
+  }
+  .burger__button:after {
+    width: 22px;
+    height: 2.5px;
+  }
 }

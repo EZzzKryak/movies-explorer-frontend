@@ -48,7 +48,7 @@ const App = () => {
     setIsTooltipPopupOpen(true);
   };
   const handleSignOut = () => {
-    console.log('Вы вышли');
+    console.log("Вы вышли");
     setLoggedIn(false);
     navigate("/");
   };

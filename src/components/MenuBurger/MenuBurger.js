@@ -9,8 +9,17 @@ function MenuBurger({ onSetSideBarIsActive }) {
   );
   return (
     <nav className="burger">
-      <button className={`burger__button ${moviesOrProfileRoute && 'burger__button_light'}`} onClick={onSetSideBarIsActive}>
-        <span className={`burger__line ${moviesOrProfileRoute && 'burger__line_light'}`}></span>
+      <button
+        className={`burger__button ${
+          moviesOrProfileRoute && "burger__button_light"
+        }`}
+        onClick={onSetSideBarIsActive}
+      >
+        <span
+          className={`burger__line ${
+            moviesOrProfileRoute && "burger__line_light"
+          }`}
+        ></span>
       </button>
     </nav>
   );

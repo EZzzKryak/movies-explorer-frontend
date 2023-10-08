@@ -1,6 +1,7 @@
 .profile-btn {
+  /* width: 100px; */
   display: flex;
-  gap: 7px;
+  gap: 8px;
   align-items: center;
   height: 32px;
   padding: 0 3px 0 11px;
@@ -9,7 +10,6 @@
   border-radius: 40px;
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.08) 0 3px 14px;
-  bottom: 0;
 }
 .profile-btn_dark {
   background-color: #2be080;

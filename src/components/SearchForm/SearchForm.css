@@ -1,5 +1,5 @@
 .search-panel {
-  padding: 0 0 13px;
+  padding: 0 0 11px;
   border-bottom: 1px solid #e8e8e8;
 }
 .search-panel__form {
@@ -18,7 +18,7 @@
 }
 .search-panel__search-btn {
   cursor: pointer;
-  padding: 8px 11px;
+  padding: 8px 13px;
   font-size: 11px;
   line-height: 18px;
   font-weight: 500;
@@ -27,4 +27,18 @@
   border: none;
   outline: none;
   border-radius: 25px;
+}
+
+@media screen and (max-width: 540px) {
+  .search-panel {
+    padding-bottom: 9px;
+    margin: 0 4px;
+  }
+  .search-panel__form {
+    gap: 20px;
+  }
+  .search-panel__input {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

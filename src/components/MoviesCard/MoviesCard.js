@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./MoviesCard.css";
 
 const MoviesCard = ({ film }) => {
+  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+
   const convertDuration = duration =>
-    (Math.floor(duration / 60) && Math.floor(duration / 60) + "ч") +
+    (Math.floor(duration / 60) && Math.floor(duration / 60) + "ч ") +
     (duration % 60) +
     "м";
 
@@ -13,7 +16,6 @@ const MoviesCard = ({ film }) => {
   const toggleLike = e => {
     e.target.classList.toggle("movie__like_active");
   };
-
   return (
     <div className="movie" key={film.movieId}>
       <Link to={film.trailerLink} target="_blank">
@@ -27,7 +29,13 @@ const MoviesCard = ({ film }) => {
         <h3 className="movie__name">{film.nameRU}</h3>
         <button
           onClick={toggleLike}
-          className={savedFilmsRoute ? "movie__delete" : "movie__like"}
+          className={
+            savedFilmsRoute
+              ? isMobile
+                ? "movie__delete movie__delete_active"
+                : "movie__delete"
+              : "movie__like"
+          }
           type="button"
           aria-label="Лайк\дизлайк"
         />

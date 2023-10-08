@@ -1,15 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./Footer.css";
 
 const Footer = () => {
+  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+
   return (
     <footer className="footer">
       <p className="footer__text">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__container">
-        <p className="footer__copyright">&#169; {new Date().getFullYear()}</p>
+        {!isMobile && (
+          <p className="footer__copyright">&#169; {new Date().getFullYear()}</p>
+        )}
         <div className="footer__links">
           <Link
             target="_blank"
@@ -26,6 +31,11 @@ const Footer = () => {
             Github
           </Link>
         </div>
+        {isMobile && (
+          <p className="footer__copyright footer__copyright_gray">
+            &#169;{new Date().getFullYear()}
+          </p>
+        )}
       </div>
     </footer>
   );

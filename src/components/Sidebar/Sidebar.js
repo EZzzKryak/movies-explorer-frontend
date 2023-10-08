@@ -4,9 +4,14 @@ import ProfileButton from "../ProfileButton/ProfileButton";
 import "./Sidebar.css";
 
 const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
+  const lightClass = "profile-btn_light";
+
   return (
     <nav className={`sidebar${sidebarIsActive ? " sidebar_active" : ""}`}>
-      <button className="sidebar__close" onClick={onSetSideBarIsActive}></button>
+      <button
+        className="sidebar__close"
+        onClick={onSetSideBarIsActive}
+      ></button>
       <ul className="sidebar__list">
         <li>
           <NavLink
@@ -45,7 +50,9 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
           </NavLink>
         </li>
       </ul>
-      <ProfileButton />
+      <div className="sidebar__profile-btn">
+        <ProfileButton lightClass={lightClass} />
+      </div>
     </nav>
   );
 };

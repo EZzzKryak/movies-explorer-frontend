@@ -18,7 +18,7 @@ const Header = () => {
 
   const { loggedIn } = useContext(AuthContext);
   const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
-  const [sidebarIsActive, setSideBarIsActive] = useState(false);
+  const [sidebarIsActive, setSideBarIsActive] = useState(true);
 
   useEffect(() => {
     setSideBarIsActive(false);
@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <header className={`header ${moviesOrProfileRoute && "header_dark"}`}>
-      <Link to={"/"}>
+      <Link className="header__logo-link" to={"/"}>
         <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
       </Link>
       {loggedIn ? (

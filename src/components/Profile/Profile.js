@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import Header from "../Header/Header";
@@ -69,17 +68,23 @@ const Profile = ({ handleEditProfile, onSignOut }) => {
               {errors.email}
             </span>
           </div>
-          <button
-            type="submit"
-            aria-label="Редактировать профиль"
-            className="profile__edit button"
-          >
-            Редактировать
-          </button>
         </form>
-        <Link to="/" onClick={onSignOut} className="profile__signout link">
-          Выйти из аккаунта
-        </Link>
+        <ul className="profile__links">
+          <li className="profile__link">
+            <button
+              type="submit"
+              aria-label="Редактировать профиль"
+              className="profile__edit button"
+            >
+              Редактировать
+            </button>
+          </li>
+          <li className="profile__link">
+            <button onClick={onSignOut} className="profile__signout link">
+              Выйти из аккаунта
+            </button>
+          </li>
+        </ul>
       </section>
     </>
   );
