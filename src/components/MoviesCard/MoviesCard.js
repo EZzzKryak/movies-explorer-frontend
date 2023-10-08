@@ -17,8 +17,8 @@ const MoviesCard = ({ film }) => {
     e.target.classList.toggle("movie__like_active");
   };
   return (
-    <div className="movie" key={film.movieId}>
-      <Link to={film.trailerLink} target="_blank">
+    <li className="movie" key={film.movieId}>
+      <Link className="button" to={film.trailerLink} target="_blank">
         <img
           className="movie__thumbnail"
           src={film.thumbnail}
@@ -26,22 +26,22 @@ const MoviesCard = ({ film }) => {
         />
       </Link>
       <div className="movie__container">
-        <h3 className="movie__name">{film.nameRU}</h3>
+        <h2 className="movie__name">{film.nameRU}</h2>
         <button
           onClick={toggleLike}
           className={
             savedFilmsRoute
               ? isMobile
-                ? "movie__delete movie__delete_active"
-                : "movie__delete"
-              : "movie__like"
+                ? "movie__delete movie__delete_active button"
+                : "movie__delete button"
+              : "movie__like button"
           }
           type="button"
           aria-label="Лайк\дизлайк"
         />
       </div>
       <p className="movie__duration">{convertDuration(film.duration)}</p>
-    </div>
+    </li>
   );
 };
 

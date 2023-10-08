@@ -10,38 +10,40 @@ const Navigation = () => {
   );
   return (
     <nav className="navbar">
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `${
-                  moviesOrProfileRoute && "navbar__link_dark"
-                } navbar__link navbar__link_active link`
-              : `${
-                  moviesOrProfileRoute && "navbar__link_dark"
-                } navbar__link link`
-          }
-          to="/movies"
-        >
-          Фильмы
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `${
-                  moviesOrProfileRoute && "navbar__link_dark"
-                } navbar__link navbar__link_active link`
-              : `${
-                  moviesOrProfileRoute && "navbar__link_dark"
-                } navbar__link link`
-          }
-          to="/saved-movies"
-        >
-          Сохранённые фильмы
-        </NavLink>
-      </li>
+      <ul className="navbar__links">
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? `${
+                    moviesOrProfileRoute ? "navbar__link_dark " : ""
+                  }navbar__link navbar__link_active link`
+                : `${
+                    moviesOrProfileRoute ? "navbar__link_dark " : ""
+                  }navbar__link link`
+            }
+            to="/movies"
+          >
+            Фильмы
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? `${
+                    moviesOrProfileRoute ? "navbar__link_dark " : ""
+                  }navbar__link navbar__link_active link`
+                : `${
+                    moviesOrProfileRoute ? "navbar__link_dark " : ""
+                  }navbar__link link`
+            }
+            to="/saved-movies"
+          >
+            Сохранённые фильмы
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 };

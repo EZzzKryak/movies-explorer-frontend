@@ -15,22 +15,26 @@ const Footer = () => {
         {!isMobile && (
           <p className="footer__copyright">&#169; {new Date().getFullYear()}</p>
         )}
-        <div className="footer__links">
-          <Link
-            target="_blank"
-            to="https://practicum.yandex.ru/"
-            className="footer__link link"
-          >
-            Яндекс.Практикум
-          </Link>
-          <Link
-            target="_blank"
-            to="https://github.com/EZzzKryak"
-            className="footer__link link"
-          >
-            Github
-          </Link>
-        </div>
+        <ul className="footer__links">
+          <li>
+            <Link
+              target="_blank"
+              to="https://practicum.yandex.ru/"
+              className="footer__link link"
+            >
+              Яндекс.Практикум
+            </Link>
+          </li>
+          <li>
+            <Link
+              target="_blank"
+              to="https://github.com/EZzzKryak"
+              className="footer__link link"
+            >
+              Github
+            </Link>
+          </li>
+        </ul>
         {isMobile && (
           <p className="footer__copyright footer__copyright_gray">
             &#169;{new Date().getFullYear()}

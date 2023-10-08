@@ -10,11 +10,13 @@ const SavedMovies = () => {
   return (
     <>
       <Header />
-      <main className="movies">
-        <SearchForm />
-        <FilterCheckbox />
-        <MoviesCardList />
-        <div className="movies__more-placeholder"></div>
+      <main>
+        <section className="movies">
+          <SearchForm />
+          <FilterCheckbox />
+          <MoviesCardList />
+          <div className="movies__more-placeholder"></div>
+        </section>
       </main>
       <Footer />
     </>

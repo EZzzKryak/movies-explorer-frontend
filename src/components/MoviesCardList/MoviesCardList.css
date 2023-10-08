@@ -1,5 +1,7 @@
 .movies-list {
-  margin-top: 70px;
+  margin: 70px 0 0;
+  padding: 0;
+  list-style-type: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 38px 20px;
@@ -15,7 +17,7 @@
   color: #a0a0a0;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   .movies-list {
     grid-template-columns: repeat(3, 1fr);
   }

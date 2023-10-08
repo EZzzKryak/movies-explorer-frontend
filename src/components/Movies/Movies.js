@@ -10,11 +10,13 @@ const Movies = () => {
   return (
     <>
       <Header />
-      <main className="movies">
-        <SearchForm />
-        <FilterCheckbox />
-        <MoviesCardList />
-        <button className="movies__more button">Ещё</button>
+      <main>
+        <section className="movies">
+          <SearchForm />
+          <FilterCheckbox />
+          <MoviesCardList />
+          <button className="movies__more button" type="button">Ещё</button>
+        </section>
       </main>
       <Footer />
     </>

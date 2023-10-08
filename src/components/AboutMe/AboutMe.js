@@ -9,13 +9,13 @@ const AboutMe = () => {
 
   return (
     <section className="about-me">
-      <h2 className="project__title">Студент</h2>
+      <h1 className="title">Студент</h1>
       <div className="about-me__container">
         {!isNotebook && (
           <img className="about-me__photo" src={myPhoto} alt="Моё фото" />
         )}
         <div className="about-me__description">
-          <h3 className="about-me__name">Александр</h3>
+          <h2 className="about-me__name">Александр</h2>
           <p className="about-me__info">Фронтенд-разработчик, 25 лет</p>
           <p className="about-me__text">
             Я родился в небольшом, но уютном городе Павлово. Получил высшее
@@ -38,7 +38,11 @@ const AboutMe = () => {
           </Link>
         </div>
         {isNotebook && (
-          <img className="about-me__photo" src={myPhoto} alt="Моё фото" />
+          <img
+            className="about-me__photo"
+            src={myPhoto}
+            alt="Фото разработчика сайта и выпускника Яндекса на курсе Веб-разработчик"
+          />
         )}
       </div>
     </section>

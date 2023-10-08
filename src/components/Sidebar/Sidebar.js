@@ -9,6 +9,7 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
   return (
     <nav className={`sidebar${sidebarIsActive ? " sidebar_active" : ""}`}>
       <button
+      type="button"
         className="sidebar__close"
         onClick={onSetSideBarIsActive}
       ></button>
@@ -18,8 +19,8 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "sidebar__list-item sidebar__list-item_active"
-                : "sidebar__list-item"
+                ? "sidebar__list-item sidebar__list-item_active link"
+                : "sidebar__list-item link"
             }
           >
             Главная
@@ -30,8 +31,8 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
             to="/movies"
             className={({ isActive }) =>
               isActive
-                ? "sidebar__list-item sidebar__list-item_active"
-                : "sidebar__list-item"
+                ? "sidebar__list-item sidebar__list-item_active link"
+                : "sidebar__list-item link"
             }
           >
             Фильмы
@@ -42,8 +43,8 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
             to="/saved-movies"
             className={({ isActive }) =>
               isActive
-                ? "sidebar__list-item sidebar__list-item_active"
-                : "sidebar__list-item"
+                ? "sidebar__list-item sidebar__list-item_active link"
+                : "sidebar__list-item link"
             }
           >
             Сохранённые фильмы

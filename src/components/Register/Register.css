@@ -10,8 +10,7 @@
   width: 396px;
 }
 .auth__title {
-  text-align: left;
-  margin: 40px 0 0;
+  margin: 37px 0 0;
   padding: 0;
   font-weight: 500;
   font-size: 24px;
@@ -19,9 +18,15 @@
   color: #000;
 }
 .auth__logo {
-  display: flex;
-  justify-content: start;
+  /* display: flex;
+  justify-content: start; */
   max-width: 38px;
+}
+.auth__logo-link {
+  display: block;
+  width: 38px;
+  cursor: pointer;
+  margin-right: auto;
 }
 .auth__form {
   width: 100%;
@@ -138,18 +143,18 @@
     margin: 56px auto 20px;
     width: 260px;
   }
-  .auth__logo {
+  .auth__logo-link {
     margin: 0 auto;
   }
   .auth__title {
-    margin-top: 50px;
+    margin-top: 47px;
     text-align: center;
   }
   .auth__field:first-of-type {
-    margin-top: 50px;
+    margin-top: 80px;
   }
   .auth__submit-error {
-    margin-top: 273px;
+    margin-top: 277px;
   }
   .auth__submit {
     margin-bottom: 14px;

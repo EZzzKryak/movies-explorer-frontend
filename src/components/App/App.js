@@ -64,7 +64,6 @@ const App = () => {
       }}
     >
       <CurrentUserContext.Provider value={currentUser}>
-        {/* // <div className="app-container"> */}
         <div className="page">
           <Routes>
             <Route path="/" element={<Main />}></Route>
@@ -96,7 +95,6 @@ const App = () => {
             tooltipStatus={tooltipStatus}
           />
         </div>
-        {/* // </div> */}
       </CurrentUserContext.Provider>
     </AuthContext.Provider>
   );

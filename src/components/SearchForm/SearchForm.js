@@ -16,6 +16,7 @@ const SearchForm = () => {
           placeholder="Фильм"
           value={movie || ""}
           onChange={handleChange}
+          required
         />
         <button
           className="search-panel__search-btn button"

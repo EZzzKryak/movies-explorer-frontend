@@ -1,8 +1,12 @@
 .navbar {
   margin: 0 auto;
+}
+.navbar__links {
   display: flex;
   gap: 16px;
   justify-content: center;
+  margin: 0;
+  padding: 0;
   list-style-type: none;
 }
 .navbar__link {

@@ -2,6 +2,9 @@
   padding: 0 0 11px;
   border-bottom: 1px solid #e8e8e8;
 }
+.search-panel:hover {
+  border-bottom: 1px solid #3456f3;
+}
 .search-panel__form {
   display: flex;
   gap: 40px;

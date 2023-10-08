@@ -29,8 +29,8 @@ const Header = () => {
   };
 
   return (
-    <header className={`header ${moviesOrProfileRoute && "header_dark"}`}>
-      <Link className="header__logo-link" to={"/"}>
+    <header className={`header${moviesOrProfileRoute ? " header_dark" : ""}`}>
+      <Link className="header__logo-link link" to={"/"}>
         <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
       </Link>
       {loggedIn ? (
@@ -53,14 +53,14 @@ const Header = () => {
           )}
         </>
       ) : (
-        <div className="header__auth-links">
+        <nav className="header__auth-links">
           <Link to="/signup" className="header__signup link">
             Регистрация
           </Link>
           <Link to="/signin" className="header__signin link">
             Войти
           </Link>
-        </div>
+        </nav>
       )}
     </header>
   );

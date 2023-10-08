@@ -6,14 +6,14 @@ const FilterCheckbox = () => {
   const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
 
   return (
-    <div className="checkbox">
-      <label className="checkbox__label">
-        {!isDesktop && <p className="checkbox__info">Короткометражки</p>}
+    <form className="checkbox">
+      <label className="checkbox__label button">
+        {!isDesktop && "Короткометражки"}
         <input className="checkbox__input" type="checkbox" />
         <span className="checkbox__switch"></span>
-        {isDesktop && <p className="checkbox__info">Короткометражки</p>}
+        {isDesktop && "Короткометражки"}
       </label>
-    </div>
+    </form>
   );
 };
 

@@ -1,6 +1,17 @@
 @import url(./vendor/normalize.css);
 @import url(./fonts/fonts.css);
 
+.title {
+  margin: 0;
+  padding: 0 0 23px;
+  text-align: left;
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: #000;
+  border-bottom: 1px solid;
+}
 .link,
 .button {
   transition: opacity 0.2s;
@@ -11,4 +22,12 @@
 }
 .button:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 540px) {
+  .title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

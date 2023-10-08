@@ -5,7 +5,7 @@ import "./Portfolio.css";
 const Portfolio = () => {
   return (
     <section className="portfolio">
-      <h2 className="portfolio__title">Портфолио</h2>
+      <h1 className="portfolio__title">Портфолио</h1>
       <ul className="portfolio__list">
         <li className="portfolio__list-item">
           <Link
@@ -14,8 +14,8 @@ const Portfolio = () => {
             className="portfolio__link link"
           >
             Статичный сайт
+            <div className="portfolio__link-arrow"></div>
           </Link>
-          <div className="portfolio__link-arrow"></div>
         </li>
         <li className="portfolio__list-item">
           <Link
@@ -24,8 +24,8 @@ const Portfolio = () => {
             className="portfolio__link link"
           >
             Адаптивный сайт
+            <div className="portfolio__link-arrow"></div>
           </Link>
-          <div className="portfolio__link-arrow"></div>
         </li>
         <li className="portfolio__list-item">
           <Link
@@ -34,8 +34,8 @@ const Portfolio = () => {
             className="portfolio__link link"
           >
             Одностраничное приложение
+            <div className="portfolio__link-arrow"></div>
           </Link>
-          <div className="portfolio__link-arrow"></div>
         </li>
       </ul>
     </section>
