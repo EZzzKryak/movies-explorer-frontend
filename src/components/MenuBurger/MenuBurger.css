@@ -1,18 +1,19 @@
 .burger {
-  height: 77px;
+  /* height: 77px;
   position: fixed;
   right: 0;
-  top: 0;
+  top: 0; */
+  grid-area: links;
   z-index: 2;
   display: flex;
-  align-items: center;
+  /* align-items: end; */
   justify-content: end;
 }
 
 .burger__button {
   width: 28px;
   height: 24px;
-  margin-right: 38px;
+  margin-right: 8px;
   position: relative;
   border: none;
   outline: none;
@@ -22,7 +23,7 @@
 .burger__button:before {
   content: "";
   position: absolute;
-  top: 0;
+  top: 1px;
   right: 0;
   width: 28px;
   background-color: #000;
@@ -31,7 +32,7 @@
 .burger__line {
   position: absolute;
   right: 0;
-  top: 9px;
+  top: 11px;
   width: 28px;
   background-color: #000;
   height: 3px;
@@ -40,7 +41,7 @@
   content: "";
   position: absolute;
   right: 0;
-  top: 18px;
+  top: 21px;
   width: 28px;
   background-color: #000;
   height: 3px;
@@ -58,18 +59,21 @@
 @media screen and (max-width: 540px) {
   .burger__button {
     width: 24px;
-    margin-right: 24px;
+    margin-right: 9px;
   }
   .burger__button:before {
     width: 22px;
     height: 2.5px;
+    top: 2px;
   }
   .burger__line {
     width: 22px;
     height: 2.5px;
+    top: 11px;
   }
   .burger__button:after {
     width: 22px;
     height: 2.5px;
+    top: 20px;
   }
 }

@@ -9,7 +9,7 @@ const FilterCheckbox = () => {
     <form className="checkbox">
       <label className="checkbox__label button">
         {!isDesktop && "Короткометражки"}
-        <input className="checkbox__input" type="checkbox" />
+        <input className="checkbox__input" type="checkbox" placeholder="Фильтр 'короткометражки'" />
         <span className="checkbox__switch"></span>
         {isDesktop && "Короткометражки"}
       </label>

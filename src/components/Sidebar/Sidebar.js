@@ -8,51 +8,56 @@ const Sidebar = ({ sidebarIsActive, onSetSideBarIsActive }) => {
 
   return (
     <nav className={`sidebar${sidebarIsActive ? " sidebar_active" : ""}`}>
-      <button
-      type="button"
-        className="sidebar__close"
-        onClick={onSetSideBarIsActive}
-      ></button>
-      <ul className="sidebar__list">
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "sidebar__list-item sidebar__list-item_active link"
-                : "sidebar__list-item link"
-            }
-          >
-            Главная
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/movies"
-            className={({ isActive }) =>
-              isActive
-                ? "sidebar__list-item sidebar__list-item_active link"
-                : "sidebar__list-item link"
-            }
-          >
-            Фильмы
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/saved-movies"
-            className={({ isActive }) =>
-              isActive
-                ? "sidebar__list-item sidebar__list-item_active link"
-                : "sidebar__list-item link"
-            }
-          >
-            Сохранённые фильмы
-          </NavLink>
-        </li>
-      </ul>
-      <div className="sidebar__profile-btn">
-        <ProfileButton lightClass={lightClass} />
+      <div className="sidebar__blur">
+        <div className="sidebar__opacity"></div>
+        <div className="sidebar__content">
+          <button
+            type="button"
+            className="sidebar__close"
+            onClick={onSetSideBarIsActive}
+          ></button>
+          <ul className="sidebar__list">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "sidebar__list-item sidebar__list-item_active link"
+                    : "sidebar__list-item link"
+                }
+              >
+                Главная
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/movies"
+                className={({ isActive }) =>
+                  isActive
+                    ? "sidebar__list-item sidebar__list-item_active link"
+                    : "sidebar__list-item link"
+                }
+              >
+                Фильмы
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/saved-movies"
+                className={({ isActive }) =>
+                  isActive
+                    ? "sidebar__list-item sidebar__list-item_active link"
+                    : "sidebar__list-item link"
+                }
+              >
+                Сохранённые фильмы
+              </NavLink>
+            </li>
+          </ul>
+          <div className="sidebar__profile-btn">
+            <ProfileButton lightClass={lightClass} />
+          </div>
+        </div>
       </div>
     </nav>
   );
