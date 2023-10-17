@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 
 export function useAdaptiveRender() {
+  const [isWideDesktop, setWideDesktop] = useState(window.innerWidth >= 1280);
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1024);
-  const [isNotebook, setNotebook] = useState(window.innerWidth >= 768);
+  const [isWideTablet, setWideTablet] = useState(window.innerWidth >= 768);
   const [isTablet, setTablet] = useState(window.innerWidth >= 540);
   const [isMobile, setMobile] = useState(window.innerWidth < 540);
 
   const updateMedia = () => {
+    setWideDesktop(window.innerWidth >= 1280);
     setDesktop(window.innerWidth > 1024);
-    setNotebook(window.innerWidth >= 768);
+    setWideTablet(window.innerWidth >= 768);
     setTablet(window.innerWidth >= 540);
     setMobile(window.innerWidth < 540);
   };
@@ -19,8 +21,9 @@ export function useAdaptiveRender() {
   });
 
   return {
+    isWideDesktop,
     isDesktop,
-    isNotebook,
+    isWideTablet,
     isTablet,
     isMobile,
   };

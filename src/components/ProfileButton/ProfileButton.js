@@ -1,20 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import profileIcon from "../../images/profile-icon.svg";
 import "./ProfileButton.css";
 
 const ProfileButton = ({ lightClass }) => {
   // Костыль, подумать над заменой
-  const moviesOrProfileRoute = !(
-    window.location.href.includes("profile") ||
-    window.location.href.includes("movies")
-  );
+  const location = useLocation();
+  const notMainRoutes =
+    location.pathname === "/profile" ||
+    location.pathname === "/saved-movies" ||
+    location.pathname === "/movies";
 
   return (
     <Link
       to="/profile"
       className={`profile-btn link ${lightClass} ${
-        moviesOrProfileRoute ? "profile-btn_dark" : ""
+        !notMainRoutes ? "profile-btn_dark" : ""
       }`}
     >
       <p className="profile-btn__text">Аккаунт</p>

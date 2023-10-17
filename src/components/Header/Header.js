@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { Link, useLocation } from "react-router-dom";
+import { MainContext } from "../../contexts/MainContext";
 import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import LogoIcon from "../../images/circle-logo.svg";
 import MenuBurger from "../MenuBurger/MenuBurger";
@@ -10,15 +10,15 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Header.css";
 
 const Header = () => {
-  // Костыль, подумать над заменой
-  const moviesOrProfileRoute = !(
-    window.location.href.includes("profile") ||
-    window.location.href.includes("movies")
-  );
-
-  const { loggedIn } = useContext(AuthContext);
-  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+  const { loggedIn } = useContext(MainContext);
+  const { isDesktop } = useAdaptiveRender();
   const [sidebarIsActive, setSideBarIsActive] = useState(true);
+  // Не ну а чо :)
+  const location = useLocation();
+  const notMainRoutes =
+    location.pathname === "/profile" ||
+    location.pathname === "/saved-movies" ||
+    location.pathname === "/movies";
 
   useEffect(() => {
     setSideBarIsActive(false);
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`header${moviesOrProfileRoute ? " header_dark" : ""}`}>
+    <header className={`header${!notMainRoutes ? " header_dark" : ""}`}>
       <Link className="header__logo-link link" to={"/"}>
         <img src={LogoIcon} alt="Логотип сайта" className="header__logo" />
       </Link>

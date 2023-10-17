@@ -63,7 +63,7 @@
 }
 .auth__input-error {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 1px);
   left: 0;
   transition: opacity 0.3s;
   font-weight: 400;
@@ -99,8 +99,8 @@
   text-align: center;
   padding: 0;
   margin: 186px 0 0;
-  font-size: 11px;
-  line-height: 13px;
+  font-size: 13px;
+  line-height: 16px;
   color: #ff0000;
   opacity: 0;
 }
@@ -155,6 +155,8 @@
   }
   .auth__submit-error {
     margin-top: 277px;
+    font-size: 11px;
+    line-height: 13px;
   }
   .auth__submit {
     margin-bottom: 14px;

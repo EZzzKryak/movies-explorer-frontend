@@ -10,7 +10,7 @@ export function useFormAndValidation() {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: e.target.validationMessage });
     setIsValid(e.target.closest("form").checkValidity());
-    // Какая-то дичь, но она работает
+    // Кастомая ошибка валидации пароля
     if (e.target.type === "password" && e.target.validity.patternMismatch) {
       e.target.setCustomValidity(
         "Пароль должен быть длиннее 8 символов и содержать хотя бы одну заглавную букву, а также цифру"

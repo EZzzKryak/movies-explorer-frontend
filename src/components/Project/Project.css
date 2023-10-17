@@ -1,7 +1,6 @@
 .project {
   padding: 110px 70px 95px;
   color: #000;
-  /* max-width: calc(100% - 140px); */
 }
 .project__runtime {
   padding: 0;

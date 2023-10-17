@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MainContext } from "../../contexts/MainContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import LogoIcon from "../../images/circle-logo.svg";
 import "./Login.css";
 
 const Login = ({ handleLogin }) => {
+  const { errorMessage } = useContext(MainContext);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
   const { email, password } = values;
@@ -35,7 +37,7 @@ const Login = ({ handleLogin }) => {
           <label className="auth__field">
             E-mail
             <input
-              pattern="[^@\s]+@[^@\s]+\.[^@\s]+" // Махнуть в будущем на другой
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
               id="login-email-input"
               type="email"
               name="email"
@@ -74,8 +76,14 @@ const Login = ({ handleLogin }) => {
               {errors.password}
             </span>
           </label>
-          <p className="auth__submit-error">
-            Вы ввели неправильный логин или пароль.
+          <p
+            className={`${
+              errorMessage
+                ? "auth__submit-error auth__submit-error_active"
+                : "auth__submit-error"
+            }`}
+          >
+            {errorMessage}
           </p>
           <button
             disabled={!isValid}

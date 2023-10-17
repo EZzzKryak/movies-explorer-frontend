@@ -1,92 +1,417 @@
-import { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { MainContext } from "../../contexts/MainContext";
+import { useShortAndSearchedMovies } from "../../hooks/useShortAndSearchedMovies";
+import {
+  authorizeUser,
+  deleteMovie,
+  getSavedMovies,
+  getUser,
+  registerUser,
+  saveMovie,
+  updateUser,
+} from "../../utils/MainApi";
+import { getAllMovies } from "../../utils/MoviesApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import NotFound from "../NotFound/NotFound";
 import Profile from "../Profile/Profile";
+import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import "./App.css";
 
 const App = () => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(true);
-
+  const location = useLocation();
   const [currentUser, setCurrentUser] = useState({
-    name: "Александр",
-    email: "pochta@yandex.ru",
-    id: "6506ea2d69e6c40f81b0e994",
+    name: "",
+    email: "",
+    id: "",
   });
-
   const [tooltipStatus, setTooltipStatus] = useState(false);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  // Context variables
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+  const [checkboxIsActive, setCheckboxIsActive] = useState(false);
+  const [savedCheckboxIsActive, setSavedCheckboxIsActive] = useState(false);
+  const [searchingMovieName, setSearchingMovieName] = useState("");
+  const [searchingSavedMovieName, setSearchingSavedMovieName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = () => {
-    console.log("Вы вошли!");
-    // setTooltipStatus(true);
-    // setIsTooltipPopupOpen(true);
-    setLoggedIn(true);
-    navigate("/");
+  const currentUrl = location.pathname;
+  // const navigation = useNavigation();
+  // console.log(navigation.location.pathname);
+
+  // Переменные сортированных фильмов
+  const shortAndSearchedMovies = useShortAndSearchedMovies(
+    movies,
+    checkboxIsActive,
+    searchingMovieName
+  );
+  const shortAndSearchedSavedMovies = useShortAndSearchedMovies(
+    savedMovies,
+    savedCheckboxIsActive,
+    searchingSavedMovieName
+  );
+
+  useEffect(() => {
+    // Сохраняю фильмы в стор и стейт после каждого поиска
+    localStorage.setItem(
+      "filteredMovies",
+      JSON.stringify(shortAndSearchedMovies)
+    );
+    setFilteredMovies(shortAndSearchedMovies);
+  }, [shortAndSearchedMovies]);
+  useEffect(() => {
+    // Сохраняю фильмы в стейт после каждого поиска
+    setFilteredSavedMovies(shortAndSearchedSavedMovies);
+  }, [shortAndSearchedSavedMovies]);
+
+  // Основной эффект при загрузке страницы
+  useEffect(() => {
+    // Проверка токена и получение информации о пользователе
+    tokenCheck();
+    getSavedMovies()
+      .then(res => {
+        setSavedMovies(res.movies);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // Запись переменных из стора в стейт при загрузке страницы
+    if (localStorage.getItem("movies")) {
+      setMovies(JSON.parse(localStorage.getItem("movies")));
+    }
+    if (localStorage.getItem("filteredMovies")) {
+      setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+    }
+    if (localStorage.getItem("checkboxIsActive") === "true") {
+      setCheckboxIsActive(localStorage.getItem("checkboxIsActive"));
+    } else {
+      setCheckboxIsActive(false);
+    }
+    if (localStorage.getItem("searchingMovieName")) {
+      setSearchingMovieName(localStorage.getItem("searchingMovieName"));
+    }
+  }, [loggedIn]);
+
+  // Проверка токена
+  const tokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        getUser(jwt)
+          .then(res => {
+            if (res) {
+              setCurrentUser({
+                id: res.id,
+                name: res.name,
+                email: res.email,
+              });
+              setLoggedIn(true);
+              navigate(currentUrl);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    }
   };
-  const handleRegister = () => {
-    console.log("Вы зарегистрировались!");
-    setTooltipStatus(true);
-    setIsTooltipPopupOpen(true);
-    navigate("/signin");
+
+  // Получение основного списка фильмов
+  const handleGetAllMovies = () => {
+    if (localStorage.getItem("movies")) {
+      setMovies(JSON.parse(localStorage.getItem("movies")));
+    } else {
+      setisLoading(true);
+      getAllMovies()
+        .then(movies => {
+          setErrorMessage("");
+          setMovies(movies);
+          localStorage.setItem("movies", JSON.stringify(movies));
+        })
+        .catch(err => {
+          setErrorMessage(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
+        })
+        .finally(() => {
+          setisLoading(false);
+        });
+    }
   };
-  const handleEditProfile = profileData => {
-    setCurrentUser({
-      ...currentUser,
-      name: profileData.name,
-      email: profileData.email,
-    });
-    setTooltipStatus(true);
-    setIsTooltipPopupOpen(true);
+  // Сохранение фильма
+  const handleSaveMovie = movie => {
+    saveMovie({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      movieId: movie.id,
+      image: `https://api.nomoreparties.co${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    })
+      .then(res => {
+        const savedFilms = [...savedMovies, res.movie];
+        setSavedMovies(savedFilms);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
+  // Удаление фильма на странице всех фильмов
+  const handleDeleteMovie = movieId => {
+    const deletedSavedMovie = savedMovies.find(
+      movie => movie.movieId === movieId
+    );
+    deleteMovie(deletedSavedMovie._id)
+      .then(res => {
+        setSavedMovies(
+          savedMovies.filter(movie => movie._id !== deletedSavedMovie._id)
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  // Удаление фильма на странице сохранённых фильмов
+  const handleDeleteSavedMovie = movieId => {
+    deleteMovie(movieId)
+      .then(res => {
+        setSavedMovies(savedMovies.filter(movie => movie._id !== movieId));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  // Управление чекбоксом -->
+  const handleCheckboxIsActive = () => {
+    localStorage.setItem("checkboxIsActive", !checkboxIsActive);
+    setCheckboxIsActive(checkboxIsActive => !checkboxIsActive);
+  };
+  const handleSavedCheckboxIsActive = () => {
+    localStorage.setItem("savedCheckboxIsActive", !savedCheckboxIsActive);
+    setSavedCheckboxIsActive(savedCheckboxIsActive => !savedCheckboxIsActive);
+  };
+
+  const handleSearchingMovieName = name => {
+    localStorage.setItem("searchingMovieName", name);
+    setSearchingMovieName(name.toLowerCase());
+  };
+  const handleSearchingSavedMovieName = name => {
+    // localStorage.setItem("searchingSavedMovieName", name);
+    setSearchingSavedMovieName(name.toLowerCase());
+  };
+  // <-- Поисковой строкой
+
+  // Авторизация
+  const handleLogin = ({ email, password }, resetForm) => {
+    authorizeUser({ email, password })
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setErrorMessage("");
+          resetForm();
+          setCurrentUser({
+            name: res.name,
+            email: res.email,
+            id: res.id,
+          });
+          setLoggedIn(true);
+          navigate("/movies");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        if (err === 401) {
+          setErrorMessage("Вы ввели неправильный логин или пароль.");
+        } else if (err === 409) {
+          setErrorMessage(
+            "При авторизации произошла ошибка. Переданный токен некорректен."
+          );
+        } else {
+          setErrorMessage(
+            "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
+          );
+        }
+      });
+  };
+  // Регистрация
+  const handleRegister = ({ email, password, name }, resetForm) => {
+    registerUser({ email, password, name })
+      .then(res => {
+        // Автоматическая авторизация после успешной регистрации
+        authorizeUser({ email, password })
+          .then(res => {
+            if (res.token) {
+              localStorage.setItem("jwt", res.token);
+              setErrorMessage("");
+              resetForm();
+              setCurrentUser({
+                name: res.name,
+                email: res.email,
+                id: res.id,
+              });
+              navigate("/movies");
+              setLoggedIn(true);
+              setTooltipStatus(true);
+              setIsTooltipPopupOpen(true);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            if (err === 401) {
+              setErrorMessage("Вы ввели неправильный логин или пароль.");
+            } else if (err === 409) {
+              setErrorMessage(
+                "При авторизации произошла ошибка. Переданный токен некорректен."
+              );
+            } else {
+              setErrorMessage(
+                "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
+              );
+            }
+          });
+      })
+      .catch(err => {
+        if (err === 409) {
+          setErrorMessage("Пользователь с таким email уже существует.");
+        } else {
+          setErrorMessage("При регистрации пользователя произошла ошибка.");
+        }
+      });
+  };
+  // Выход из аккаунта (очистка стора и стейтов)
   const handleSignOut = () => {
-    console.log("Вы вышли");
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("movies");
+    localStorage.removeItem("filteredMovies");
+    localStorage.removeItem("filteredSavedMovies");
+    localStorage.removeItem("checkboxIsActive");
+    localStorage.removeItem("savedCheckboxIsActive");
+    localStorage.removeItem("searchingMovieName");
+    setCurrentUser({
+      name: "",
+      email: "",
+      id: "",
+    });
+    setMovies([]);
+    setSavedMovies([]);
+    setFilteredMovies([]);
+    setFilteredSavedMovies([]);
+    setCheckboxIsActive(false);
+    setSearchingMovieName("");
+    setErrorMessage("");
     setLoggedIn(false);
+    // Редирект на главную
     navigate("/");
   };
-
+  // Обновление данных пользователя
+  const handleUpdateUser = ({ name, email }, resetForm) => {
+    // setisLoading(true);
+    updateUser({ name, email })
+      .then(res => {
+        setErrorMessage("");
+        setCurrentUser({
+          ...currentUser,
+          name: res.name,
+          email: res.email,
+        });
+        resetForm();
+        setTooltipStatus(true);
+        setIsTooltipPopupOpen(true);
+      })
+      .catch(err => {
+        setErrorMessage("Пользователь с таким email уже существует.");
+      })
+      .finally(() => {
+        // setisLoading(false);
+      });
+  };
+  //
   const closeAllPopups = () => {
     setIsTooltipPopupOpen(false);
   };
 
   return (
-    <AuthContext.Provider
+    <MainContext.Provider
       value={{
         loggedIn,
+        isLoading,
+        movies,
+        savedMovies,
+        filteredMovies,
+        filteredSavedMovies,
+        checkboxIsActive,
+        savedCheckboxIsActive,
+        searchingMovieName,
+        errorMessage,
       }}
     >
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <Routes>
-            <Route path="/" element={<Main />}></Route>
+            <Route path="/" element={<Main />} />
             <Route
               path="signup"
               element={<Register handleRegister={handleRegister} />}
-            ></Route>
+            />
             <Route
               path="signin"
               element={<Login handleLogin={handleLogin} />}
-            ></Route>
-            <Route path="movies" element={<Movies />}></Route>
-            <Route path="movies" element={<Movies />}></Route>
-            <Route path="saved-movies" element={<SavedMovies />}></Route>
+            />
+            <Route
+              path="movies"
+              element={
+                <ProtectedRouteElement
+                  element={Movies}
+                  handleSaveMovie={handleSaveMovie}
+                  handleDeleteMovie={handleDeleteMovie}
+                  handleGetAllMovies={handleGetAllMovies}
+                  loggedIn={loggedIn}
+                  handleCheckboxIsActive={handleCheckboxIsActive}
+                  handleSearchingMovieName={handleSearchingMovieName}
+                />
+              }
+            />
+            <Route
+              path="saved-movies"
+              element={
+                <ProtectedRouteElement
+                  element={SavedMovies}
+                  loggedIn={loggedIn}
+                  handleDeleteSavedMovie={handleDeleteSavedMovie}
+                  handleSearchingSavedMovieName={handleSearchingSavedMovieName}
+                  handleSavedCheckboxIsActive={handleSavedCheckboxIsActive}
+                />
+              }
+            />
             <Route
               path="profile"
               element={
-                <Profile
-                  handleEditProfile={handleEditProfile}
+                <ProtectedRouteElement
+                  element={Profile}
+                  handleUpdateUser={handleUpdateUser}
                   onSignOut={handleSignOut}
+                  loggedIn={loggedIn}
                 />
               }
-            ></Route>
+            />
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
           <InfoTooltip
@@ -96,7 +421,7 @@ const App = () => {
           />
         </div>
       </CurrentUserContext.Provider>
-    </AuthContext.Provider>
+    </MainContext.Provider>
   );
 };
 

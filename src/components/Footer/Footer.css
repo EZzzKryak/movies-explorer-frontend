@@ -1,6 +1,5 @@
 .footer {
   padding: 80px 70px 20px;
-  /* max-width: calc(100% - 140px); */
   flex-shrink: 0;
 }
 .footer__text {

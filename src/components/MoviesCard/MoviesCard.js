@@ -1,48 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { MainContext } from "../../contexts/MainContext";
 import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./MoviesCard.css";
 
-const MoviesCard = ({ film }) => {
-  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+const MoviesCard = ({
+  movie,
+  handleSaveMovie,
+  handleDeleteMovie,
+  handleDeleteSavedMovie,
+}) => {
+  const { savedMovies } = useContext(MainContext);
+  const { isMobile } = useAdaptiveRender();
+  const location = useLocation();
+  const savedMoviesRoute = location.pathname === "/saved-movies";
+  const moviesRoute = location.pathname === "/movies";
 
   const convertDuration = duration =>
     (Math.floor(duration / 60) && Math.floor(duration / 60) + "ч ") +
     (duration % 60) +
     "м";
 
-  // Временное решение до функционала
-  const savedFilmsRoute = window.location.href.includes("saved-movies");
-  const toggleLike = e => {
-    e.target.classList.toggle("movie__like_active");
-  };
-  return (
-    <li className="movie" key={film.movieId}>
-      <Link className="button" to={film.trailerLink} target="_blank">
-        <img
-          className="movie__thumbnail"
-          src={film.thumbnail}
-          alt={`Постер фильма ${film.nameRU}`}
-        />
-      </Link>
-      <div className="movie__container">
-        <h2 className="movie__name">{film.nameRU}</h2>
-        <button
-          onClick={toggleLike}
-          className={
-            savedFilmsRoute
-              ? isMobile
+  const isLiked = savedMovies.some(i => i.movieId === movie.id);
+
+  if (moviesRoute) {
+    return (
+      <li className="movie" key={movie.id}>
+        <Link className="button" to={movie.trailerLink} target="_blank">
+          <img
+            className="movie__thumbnail"
+            src={`https://api.nomoreparties.co${movie.image.url}`}
+            alt={`Постер фильма ${movie.nameRU}`}
+          />
+        </Link>
+        <div className="movie__container">
+          <h2 className="movie__name">{movie.nameRU}</h2>
+          <button
+            onClick={
+              isLiked
+                ? () => handleDeleteMovie(movie.id)
+                : () => handleSaveMovie(movie)
+            }
+            className={
+              isLiked
+                ? "movie__like movie__like_active button"
+                : "movie__like button"
+            }
+            type="button"
+            aria-label="Лайк\дизлайк"
+          />
+        </div>
+        <p className="movie__duration">{convertDuration(movie.duration)}</p>
+      </li>
+    );
+  }
+
+  if (savedMoviesRoute) {
+    return (
+      <li className="movie" key={movie.id}>
+        <Link className="button" to={movie.trailerLink} target="_blank">
+          <img
+            className="movie__thumbnail"
+            src={movie.image}
+            alt={`Постер фильма ${movie.nameRU}`}
+          />
+        </Link>
+        <div className="movie__container">
+          <h2 className="movie__name">{movie.nameRU}</h2>
+          <button
+            onClick={() => handleDeleteSavedMovie(movie._id)}
+            className={
+              isMobile
                 ? "movie__delete movie__delete_active button"
                 : "movie__delete button"
-              : "movie__like button"
-          }
-          type="button"
-          aria-label="Лайк\дизлайк"
-        />
-      </div>
-      <p className="movie__duration">{convertDuration(film.duration)}</p>
-    </li>
-  );
+            }
+            type="button"
+            aria-label="Лайк\дизлайк"
+          />
+        </div>
+        <p className="movie__duration">{convertDuration(movie.duration)}</p>
+      </li>
+    );
+  }
 };
 
 export default MoviesCard;

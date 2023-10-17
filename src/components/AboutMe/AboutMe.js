@@ -5,7 +5,7 @@ import myPhoto from "../../images/my-photo.jpg";
 import "./AboutMe.css";
 
 const AboutMe = () => {
-  const { isDesktop, isTablet, isNotebook } = useAdaptiveRender();
+  const { isNotebook } = useAdaptiveRender();
 
   return (
     <section className="about-me">

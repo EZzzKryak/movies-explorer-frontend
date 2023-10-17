@@ -4,7 +4,7 @@ import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./Footer.css";
 
 const Footer = () => {
-  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+  const { isMobile } = useAdaptiveRender();
 
   return (
     <footer className="footer">

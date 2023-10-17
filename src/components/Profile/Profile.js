@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { MainContext } from "../../contexts/MainContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-const Profile = ({ handleEditProfile, onSignOut }) => {
+const Profile = ({ handleUpdateUser, onSignOut }) => {
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { errorMessage } = useContext(MainContext);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
   const { name, email } = values;
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (isValid) {
-      handleEditProfile(values);
+    if (isValid || (currentUser.name !== name && currentUser.email !== email)) {
+      handleUpdateUser(values, resetForm);
     }
   };
 
@@ -31,8 +34,9 @@ const Profile = ({ handleEditProfile, onSignOut }) => {
             <div className="profile__field">
               <label className="profile__label">Имя</label>
               <input
+                pattern="^[a-zA-zа-яА-ЯёЁ\-\s]+"
                 id="profile-name-input"
-                placeholder="Имя"
+                placeholder={currentUser.name}
                 minLength="2"
                 maxLength="30"
                 type="text"
@@ -55,7 +59,7 @@ const Profile = ({ handleEditProfile, onSignOut }) => {
               <input
                 pattern="[^@\s]+@[^@\s]+\.[^@\s]+" // Махнуть в будущем на другой
                 id="profile-email-input"
-                placeholder="E-mail"
+                placeholder={currentUser.email}
                 type="email"
                 name="email"
                 className="profile__input"
@@ -71,23 +75,40 @@ const Profile = ({ handleEditProfile, onSignOut }) => {
                 {errors.email}
               </span>
             </div>
+            <p
+              className={`${
+                errorMessage
+                  ? "profile__edit-error profile__edit-error_active"
+                  : "profile__edit-error"
+              }`}
+            >
+              {errorMessage}
+            </p>
+            <ul className="profile__links">
+              <li className="profile__link">
+                <button
+                  disabled={
+                    !isValid ||
+                    (currentUser.name === name && currentUser.email === email)
+                  }
+                  type="submit"
+                  aria-label="Редактировать профиль"
+                  className="profile__edit button"
+                >
+                  Редактировать
+                </button>
+              </li>
+              <li className="profile__link">
+                <button
+                  onClick={onSignOut}
+                  className="profile__signout link"
+                  type="button"
+                >
+                  Выйти из аккаунта
+                </button>
+              </li>
+            </ul>
           </form>
-          <ul className="profile__links">
-            <li className="profile__link">
-              <button
-                type="submit"
-                aria-label="Редактировать профиль"
-                className="profile__edit button"
-              >
-                Редактировать
-              </button>
-            </li>
-            <li className="profile__link">
-              <button onClick={onSignOut} className="profile__signout link" type="button">
-                Выйти из аккаунта
-              </button>
-            </li>
-          </ul>
         </section>
       </main>
     </>
