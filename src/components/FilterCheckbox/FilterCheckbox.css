@@ -1,5 +1,6 @@
 .checkbox {
-  width: max-content;
+  display: flex;
+  /* width: max-content; */
   margin: 36px 0 50px;
 }
 .checkbox__label {
