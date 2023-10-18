@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import myPhoto from "../../images/my-photo.jpg";
 import "./AboutMe.css";
@@ -29,13 +28,14 @@ const AboutMe = () => {
             алгоритмы, углубляюсь в тему computer science. Хочу начать карьеру в
             it и работать над действительно крутыми продуктами.
           </p>
-          <Link
+          <a
             target="_blank"
-            to="https://github.com/EZzzKryak"
+            rel="noreferrer"
+            href="https://github.com/EZzzKryak"
             className="about-me__github link"
           >
             Github
-          </Link>
+          </a>
         </div>
         {isNotebook && (
           <img

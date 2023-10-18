@@ -9,8 +9,9 @@ const MoviesCardList = ({
   handleSaveMovie,
   handleDeleteSavedMovie,
   handleDeleteMovie,
+  handleResetFilteredSavedMovies,
 }) => {
-  const { filteredMovies, filteredSavedMovies, errorMessage } =
+  const { savedMovies, filteredMovies, filteredSavedMovies, errorMessage } =
     useContext(MainContext);
   const { isWideDesktop, isDesktop, isTablet, isMobile } = useAdaptiveRender();
 
@@ -67,6 +68,12 @@ const MoviesCardList = ({
   const handleLoadMoreMovies = () => {
     setLoadingMovies(loadingMovies + stepLoadingMovies);
   };
+
+  useEffect(() => {
+    if (savedMoviesRoute) {
+      handleResetFilteredSavedMovies(savedMovies);
+    }
+  }, []);
 
   if (moviesRoute) {
     // Если в сторе есть сохранённые фильмы, то рендерить их или пустую заглушку

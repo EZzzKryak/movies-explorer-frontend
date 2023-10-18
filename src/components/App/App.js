@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { MainContext } from "../../contexts/MainContext";
 import { useShortAndSearchedMovies } from "../../hooks/useShortAndSearchedMovies";
@@ -63,31 +63,43 @@ const App = () => {
     searchingSavedMovieName
   );
 
-  useEffect(() => {
     // Сохраняю фильмы в стор и стейт после каждого поиска
+  useEffect(() => {
     localStorage.setItem(
       "filteredMovies",
       JSON.stringify(shortAndSearchedMovies)
     );
     setFilteredMovies(shortAndSearchedMovies);
   }, [shortAndSearchedMovies]);
+    // Сохраняю сохранённые фильмы в стейт после каждого поиска
   useEffect(() => {
-    // Сохраняю фильмы в стейт после каждого поиска
     setFilteredSavedMovies(shortAndSearchedSavedMovies);
   }, [shortAndSearchedSavedMovies]);
 
+  // Сброс сохранённых фильмов при первой отрисовке (необходим из-за работы хука фильтрации)
+  useEffect(() => {
+    setFilteredSavedMovies(savedMovies);
+  }, []);
+  const handleResetFilteredSavedMovies = (moviesState) => {
+    setFilteredSavedMovies(moviesState);
+    setSavedCheckboxIsActive(false);
+    setSearchingSavedMovieName('');
+  }
+
   // Основной эффект при загрузке страницы
   useEffect(() => {
-    // Проверка токена и получение информации о пользователе
-    tokenCheck();
-    getSavedMovies()
-      .then(res => {
-        setSavedMovies(res.movies);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    // Запись переменных из стора в стейт при загрузке страницы
+    // Проверка токена и получение информации о пользователе и фильмах
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      Promise.all([getUser(jwt), getSavedMovies()])
+      .then(([userData, savedMoviesData]) => {
+        setCurrentUser({
+          id: userData.id,
+          name: userData.name,
+          email: userData.email,
+        });
+        setSavedMovies(savedMoviesData.movies);
+            // Запись переменных из стора в стейт
     if (localStorage.getItem("movies")) {
       setMovies(JSON.parse(localStorage.getItem("movies")));
     }
@@ -102,31 +114,14 @@ const App = () => {
     if (localStorage.getItem("searchingMovieName")) {
       setSearchingMovieName(localStorage.getItem("searchingMovieName"));
     }
-  }, [loggedIn]);
-
-  // Проверка токена
-  const tokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        getUser(jwt)
-          .then(res => {
-            if (res) {
-              setCurrentUser({
-                id: res.id,
-                name: res.name,
-                email: res.email,
-              });
-              setLoggedIn(true);
-              navigate(currentUrl);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
+          setLoggedIn(true);
+          navigate(currentUrl, { replace: true });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     }
-  };
+  }, [loggedIn]);
 
   // Получение основного списка фильмов
   const handleGetAllMovies = () => {
@@ -204,9 +199,8 @@ const App = () => {
     localStorage.setItem("checkboxIsActive", !checkboxIsActive);
     setCheckboxIsActive(checkboxIsActive => !checkboxIsActive);
   };
-  const handleSavedCheckboxIsActive = () => {
-    localStorage.setItem("savedCheckboxIsActive", !savedCheckboxIsActive);
-    setSavedCheckboxIsActive(savedCheckboxIsActive => !savedCheckboxIsActive);
+  const handleSavedCheckboxIsActive = (state) => {
+    setSavedCheckboxIsActive(state);
   };
 
   const handleSearchingMovieName = name => {
@@ -214,7 +208,6 @@ const App = () => {
     setSearchingMovieName(name.toLowerCase());
   };
   const handleSearchingSavedMovieName = name => {
-    // localStorage.setItem("searchingSavedMovieName", name);
     setSearchingSavedMovieName(name.toLowerCase());
   };
   // <-- Поисковой строкой
@@ -256,37 +249,7 @@ const App = () => {
     registerUser({ email, password, name })
       .then(res => {
         // Автоматическая авторизация после успешной регистрации
-        authorizeUser({ email, password })
-          .then(res => {
-            if (res.token) {
-              localStorage.setItem("jwt", res.token);
-              setErrorMessage("");
-              resetForm();
-              setCurrentUser({
-                name: res.name,
-                email: res.email,
-                id: res.id,
-              });
-              navigate("/movies");
-              setLoggedIn(true);
-              setTooltipStatus(true);
-              setIsTooltipPopupOpen(true);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-            if (err === 401) {
-              setErrorMessage("Вы ввели неправильный логин или пароль.");
-            } else if (err === 409) {
-              setErrorMessage(
-                "При авторизации произошла ошибка. Переданный токен некорректен."
-              );
-            } else {
-              setErrorMessage(
-                "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
-              );
-            }
-          });
+        handleLogin({ email, password }, resetForm)
       })
       .catch(err => {
         if (err === 409) {
@@ -303,7 +266,6 @@ const App = () => {
     localStorage.removeItem("filteredMovies");
     localStorage.removeItem("filteredSavedMovies");
     localStorage.removeItem("checkboxIsActive");
-    localStorage.removeItem("savedCheckboxIsActive");
     localStorage.removeItem("searchingMovieName");
     setCurrentUser({
       name: "",
@@ -369,11 +331,11 @@ const App = () => {
             <Route path="/" element={<Main />} />
             <Route
               path="signup"
-              element={<Register handleRegister={handleRegister} />}
+              element={loggedIn ? <Navigate to={'/movies'} />: <Register handleRegister={handleRegister} />}
             />
             <Route
               path="signin"
-              element={<Login handleLogin={handleLogin} />}
+              element={loggedIn ? <Navigate to={'/movies'} />: <Login handleLogin={handleLogin} />}
             />
             <Route
               path="movies"
@@ -398,6 +360,7 @@ const App = () => {
                   handleDeleteSavedMovie={handleDeleteSavedMovie}
                   handleSearchingSavedMovieName={handleSearchingSavedMovieName}
                   handleSavedCheckboxIsActive={handleSavedCheckboxIsActive}
+                  handleResetFilteredSavedMovies={handleResetFilteredSavedMovies}
                 />
               }
             />

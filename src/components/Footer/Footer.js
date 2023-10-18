@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./Footer.css";
 
@@ -17,22 +16,24 @@ const Footer = () => {
         )}
         <ul className="footer__links">
           <li>
-            <Link
+            <a
               target="_blank"
-              to="https://practicum.yandex.ru/"
+              rel="noreferrer"
+              href="https://practicum.yandex.ru/"
               className="footer__link link"
             >
               Яндекс.Практикум
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
+            <a
               target="_blank"
-              to="https://github.com/EZzzKryak"
+              rel="noreferrer"
+              href="https://github.com/EZzzKryak"
               className="footer__link link"
             >
               Github
-            </Link>
+            </a>
           </li>
         </ul>
         {isMobile && (

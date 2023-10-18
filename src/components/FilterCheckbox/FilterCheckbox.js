@@ -42,7 +42,7 @@ const FilterCheckbox = ({
         <label className="checkbox__label button">
           {!isDesktop && "Короткометражки"}
           <input
-            onClick={handleSavedCheckboxIsActive}
+            onClick={() => handleSavedCheckboxIsActive(!savedCheckboxIsActive)}
             className="checkbox__input"
             type="checkbox"
             placeholder="Фильтр по короткометражкам"

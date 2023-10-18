@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { MainContext } from "../../contexts/MainContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
@@ -8,13 +8,20 @@ import "./Profile.css";
 const Profile = ({ handleUpdateUser, onSignOut }) => {
   const currentUser = useContext(CurrentUserContext);
   const { errorMessage } = useContext(MainContext);
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
     useFormAndValidation();
   const { name, email } = values;
 
+  useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [currentUser]);
+
   const handleSubmit = e => {
     e.preventDefault();
-    if (isValid || (currentUser.name !== name && currentUser.email !== email)) {
+    if (isValid && (currentUser.name !== name || currentUser.email !== email)) {
       handleUpdateUser(values, resetForm);
     }
   };
@@ -36,7 +43,7 @@ const Profile = ({ handleUpdateUser, onSignOut }) => {
               <input
                 pattern="^[a-zA-zа-яА-ЯёЁ\-\s]+"
                 id="profile-name-input"
-                placeholder={currentUser.name}
+                placeholder="Введите имя"
                 minLength="2"
                 maxLength="30"
                 type="text"
@@ -57,9 +64,9 @@ const Profile = ({ handleUpdateUser, onSignOut }) => {
             <div className="profile__field">
               <label className="profile__label">E-mail</label>
               <input
-                pattern="[^@\s]+@[^@\s]+\.[^@\s]+" // Махнуть в будущем на другой
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                 id="profile-email-input"
-                placeholder={currentUser.email}
+                placeholder="Введите почту"
                 type="email"
                 name="email"
                 className="profile__input"

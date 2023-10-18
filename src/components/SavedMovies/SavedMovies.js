@@ -12,6 +12,7 @@ const SavedMovies = ({
   handleSearchingSavedMovieName,
   handleDeleteSavedMovie,
   handleSavedCheckboxIsActive,
+  handleResetFilteredSavedMovies,
 }) => {
   const { isLoading } = useContext(MainContext);
 
@@ -28,7 +29,10 @@ const SavedMovies = ({
           {isLoading ? (
             <Preloader />
           ) : (
-            <MoviesCardList handleDeleteSavedMovie={handleDeleteSavedMovie} />
+            <MoviesCardList
+              handleDeleteSavedMovie={handleDeleteSavedMovie}
+              handleResetFilteredSavedMovies={handleResetFilteredSavedMovies}
+            />
           )}
         </section>
       </main>

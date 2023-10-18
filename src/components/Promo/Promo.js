@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useAdaptiveRender } from "../../hooks/useAdaptiveRender";
 import "./Promo.css";
 
 const Promo = () => {
-  const { isDesktop, isTablet, isMobile } = useAdaptiveRender();
+  const { isDesktop } = useAdaptiveRender();
 
   return (
     <section className="promo">
@@ -20,13 +19,14 @@ const Promo = () => {
         </div>
         {isDesktop && <div className="promo__img"></div>}
       </div>
-      <Link
-        to="https://github.com/EZzzKryak/movies-explorer-frontend"
+      <a
+        href="https://github.com/EZzzKryak/movies-explorer-frontend"
+        rel="noreferrer"
         target="_blank"
         className="promo__learn-more button"
       >
         Узнать больше
-      </Link>
+      </a>
     </section>
   );
 };

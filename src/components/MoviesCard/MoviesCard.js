@@ -23,18 +23,22 @@ const MoviesCard = ({
 
   const isLiked = savedMovies.some(i => i.movieId === movie.id);
 
-  if (moviesRoute) {
-    return (
-      <li className="movie" key={movie.id}>
-        <Link className="button" to={movie.trailerLink} target="_blank">
-          <img
-            className="movie__thumbnail"
-            src={`https://api.nomoreparties.co${movie.image.url}`}
-            alt={`Постер фильма ${movie.nameRU}`}
-          />
-        </Link>
-        <div className="movie__container">
-          <h2 className="movie__name">{movie.nameRU}</h2>
+  return (
+    <li className="movie" key={movie.id}>
+      <Link className="button" to={movie.trailerLink} target="_blank">
+        <img
+          className="movie__thumbnail"
+          src={
+            moviesRoute
+              ? `https://api.nomoreparties.co${movie.image.url}`
+              : movie.image
+          }
+          alt={`Постер фильма ${movie.nameRU}`}
+        />
+      </Link>
+      <div className="movie__container">
+        <h2 className="movie__name">{movie.nameRU}</h2>
+        {moviesRoute && (
           <button
             onClick={
               isLiked
@@ -49,24 +53,8 @@ const MoviesCard = ({
             type="button"
             aria-label="Лайк\дизлайк"
           />
-        </div>
-        <p className="movie__duration">{convertDuration(movie.duration)}</p>
-      </li>
-    );
-  }
-
-  if (savedMoviesRoute) {
-    return (
-      <li className="movie" key={movie.id}>
-        <Link className="button" to={movie.trailerLink} target="_blank">
-          <img
-            className="movie__thumbnail"
-            src={movie.image}
-            alt={`Постер фильма ${movie.nameRU}`}
-          />
-        </Link>
-        <div className="movie__container">
-          <h2 className="movie__name">{movie.nameRU}</h2>
+        )}
+        {savedMoviesRoute && (
           <button
             onClick={() => handleDeleteSavedMovie(movie._id)}
             className={
@@ -77,11 +65,11 @@ const MoviesCard = ({
             type="button"
             aria-label="Лайк\дизлайк"
           />
-        </div>
-        <p className="movie__duration">{convertDuration(movie.duration)}</p>
-      </li>
-    );
-  }
+        )}
+      </div>
+      <p className="movie__duration">{convertDuration(movie.duration)}</p>
+    </li>
+  );
 };
 
 export default MoviesCard;
