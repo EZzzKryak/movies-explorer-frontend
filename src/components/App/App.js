@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { MainContext } from "../../contexts/MainContext";
 import { useShortAndSearchedMovies } from "../../hooks/useShortAndSearchedMovies";
@@ -63,7 +69,7 @@ const App = () => {
     searchingSavedMovieName
   );
 
-    // Сохраняю фильмы в стор и стейт после каждого поиска
+  // Сохраняю фильмы в стор и стейт после каждого поиска
   useEffect(() => {
     localStorage.setItem(
       "filteredMovies",
@@ -71,20 +77,21 @@ const App = () => {
     );
     setFilteredMovies(shortAndSearchedMovies);
   }, [shortAndSearchedMovies]);
-    // Сохраняю сохранённые фильмы в стейт после каждого поиска
+  // Сохраняю сохранённые фильмы в стейт после каждого поиска
   useEffect(() => {
     setFilteredSavedMovies(shortAndSearchedSavedMovies);
   }, [shortAndSearchedSavedMovies]);
 
   // Сброс сохранённых фильмов при первой отрисовке (необходим из-за работы хука фильтрации)
   useEffect(() => {
+    setErrorMessage("");
     setFilteredSavedMovies(savedMovies);
   }, []);
-  const handleResetFilteredSavedMovies = (moviesState) => {
+  const handleResetFilteredSavedMovies = moviesState => {
     setFilteredSavedMovies(moviesState);
     setSavedCheckboxIsActive(false);
-    setSearchingSavedMovieName('');
-  }
+    setSearchingSavedMovieName("");
+  };
 
   // Основной эффект при загрузке страницы
   useEffect(() => {
@@ -92,34 +99,36 @@ const App = () => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       Promise.all([getUser(jwt), getSavedMovies()])
-      .then(([userData, savedMoviesData]) => {
-        setCurrentUser({
-          id: userData.id,
-          name: userData.name,
-          email: userData.email,
-        });
-        setSavedMovies(savedMoviesData.movies);
-            // Запись переменных из стора в стейт
-    if (localStorage.getItem("movies")) {
-      setMovies(JSON.parse(localStorage.getItem("movies")));
-    }
-    if (localStorage.getItem("filteredMovies")) {
-      setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")));
-    }
-    if (localStorage.getItem("checkboxIsActive") === "true") {
-      setCheckboxIsActive(localStorage.getItem("checkboxIsActive"));
-    } else {
-      setCheckboxIsActive(false);
-    }
-    if (localStorage.getItem("searchingMovieName")) {
-      setSearchingMovieName(localStorage.getItem("searchingMovieName"));
-    }
+        .then(([userData, savedMoviesData]) => {
+          setCurrentUser({
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+          });
+          setSavedMovies(savedMoviesData.movies);
+          // Запись переменных из стора в стейт
+          if (localStorage.getItem("movies")) {
+            setMovies(JSON.parse(localStorage.getItem("movies")));
+          }
+          if (localStorage.getItem("filteredMovies")) {
+            setFilteredMovies(
+              JSON.parse(localStorage.getItem("filteredMovies"))
+            );
+          }
+          if (localStorage.getItem("checkboxIsActive") === "true") {
+            setCheckboxIsActive(localStorage.getItem("checkboxIsActive"));
+          } else {
+            setCheckboxIsActive(false);
+          }
+          if (localStorage.getItem("searchingMovieName")) {
+            setSearchingMovieName(localStorage.getItem("searchingMovieName"));
+          }
           setLoggedIn(true);
           navigate(currentUrl, { replace: true });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }, [loggedIn]);
 
@@ -199,7 +208,7 @@ const App = () => {
     localStorage.setItem("checkboxIsActive", !checkboxIsActive);
     setCheckboxIsActive(checkboxIsActive => !checkboxIsActive);
   };
-  const handleSavedCheckboxIsActive = (state) => {
+  const handleSavedCheckboxIsActive = state => {
     setSavedCheckboxIsActive(state);
   };
 
@@ -249,7 +258,7 @@ const App = () => {
     registerUser({ email, password, name })
       .then(res => {
         // Автоматическая авторизация после успешной регистрации
-        handleLogin({ email, password }, resetForm)
+        handleLogin({ email, password }, resetForm);
       })
       .catch(err => {
         if (err === 409) {
@@ -331,11 +340,23 @@ const App = () => {
             <Route path="/" element={<Main />} />
             <Route
               path="signup"
-              element={loggedIn ? <Navigate to={'/movies'} />: <Register handleRegister={handleRegister} />}
+              element={
+                loggedIn ? (
+                  <Navigate to={"/movies"} />
+                ) : (
+                  <Register handleRegister={handleRegister} />
+                )
+              }
             />
             <Route
               path="signin"
-              element={loggedIn ? <Navigate to={'/movies'} />: <Login handleLogin={handleLogin} />}
+              element={
+                loggedIn ? (
+                  <Navigate to={"/movies"} />
+                ) : (
+                  <Login handleLogin={handleLogin} />
+                )
+              }
             />
             <Route
               path="movies"
@@ -360,7 +381,9 @@ const App = () => {
                   handleDeleteSavedMovie={handleDeleteSavedMovie}
                   handleSearchingSavedMovieName={handleSearchingSavedMovieName}
                   handleSavedCheckboxIsActive={handleSavedCheckboxIsActive}
-                  handleResetFilteredSavedMovies={handleResetFilteredSavedMovies}
+                  handleResetFilteredSavedMovies={
+                    handleResetFilteredSavedMovies
+                  }
                 />
               }
             />
