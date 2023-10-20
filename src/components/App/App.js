@@ -82,9 +82,12 @@ const App = () => {
     setFilteredSavedMovies(shortAndSearchedSavedMovies);
   }, [shortAndSearchedSavedMovies]);
 
-  // Сброс сохранённых фильмов при первой отрисовке (необходим из-за работы хука фильтрации)
+  // Очистка сообщения ошибки при смене роута
   useEffect(() => {
     setErrorMessage("");
+  }, [currentUrl]);
+  // Сброс сохранённых фильмов при первой отрисовке (необходим из-за работы хука фильтрации)
+  useEffect(() => {
     setFilteredSavedMovies(savedMovies);
   }, []);
   const handleResetFilteredSavedMovies = moviesState => {
