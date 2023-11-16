@@ -1,0 +1,19 @@
+.movies {
+  padding: 69px 70px 78px;
+  flex-grow: 1;
+}
+.main {
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .movies {
+    padding: 79px 30px 78px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .movies {
+    padding: 85px 10px 80px;
+  }
+}
