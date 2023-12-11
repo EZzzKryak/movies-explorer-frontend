@@ -1,5 +1,5 @@
 # Movies explorer
-![alt teg](https://i.ibb.co/0GG5dxT/hero-ID-2.jpg)
+![alt teg](https://i.ibb.co/tzSb9Xv/image.png)
 ### Описание проекта :book:
 Фуллстэк приложение-визитка с библиотекой любимых фильмов и CRUD-функционалом. 
 ### Возможности и функционал :computer:
